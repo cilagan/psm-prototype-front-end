@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>Proposal ID</th>
+      <th>Proposal Title</th>
+      <th colspan="2">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |proposal|}}
+    <tr>
+    <td>{{#link-to "proposal" proposal}}{{proposal.tempPropId}}{{/link-to}}</td>
+    <td>{{proposal.proposalTitle}}</td>
+    <td><a href="#" {{action "delete" proposal}}>Delete</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

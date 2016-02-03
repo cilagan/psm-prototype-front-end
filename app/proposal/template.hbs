@@ -1,0 +1,29 @@
+
+
+<div class="row">
+  <div class="col-xs-2">
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation">{{#link-to "proposals"}}All Proposals{{/link-to}}</li>
+      <!-- <li role="presentation">{{#link-to "cover-sheet"}}Cover Sheet{{/link-to}}</li> -->
+      <li role="presentation">{{#link-to "cover-sheet" model}}Cover Sheet{{/link-to}}</li>
+      <li role="presentation">{{#link-to "project-description" model}}Project Description{{/link-to}}</li>
+      <li role="presentation">{{#link-to "data-management-plan" model}}Data Management Plan{{/link-to}}</li>
+      <!-- <li role="presentation">{{#link-to "bio-sketch"}}Bio Sketches{{/link-to}}</li> -->
+      <!-- <li role="presentation">{{#link-to "bio-sketch"}}Bio Sketches{{/link-to}}</li> -->
+    </ul>
+  </div>
+
+  <div class="col-xs-10">
+     {{outlet}}
+  </div>
+
+</div>
+
+
+
+
+<h2>I AM THE PROPOSAL INDEX</h2>
+
+This is {{model.proposalTitle}}, ID: {{model.proposalId}}
+
+<a href="#" {{action "delete" model}}>Delete</a>
