@@ -21,6 +21,8 @@ Router.map(function() {
   this.route('project-description', {path: '/proposal/:proposal_id/project-description'});
   this.route('data-management-plan', { path: '/proposal/:proposal_id/dmp' });
 
+  //Creation Wizard
+  this.route('wizard', {path: '/create'});
 
   //Page Not Found
   this.route('page-not-found', { path: '/*wildcard' });

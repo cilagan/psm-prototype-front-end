@@ -1,0 +1,17 @@
+<h1>Wizard Creation Base Template</h1>
+
+
+{{#if selectFundingOp}}
+  {{wizard/select-funding-op next=(action 'toDivisionProgram')}}
+{{/if}}
+
+{{#if selectDivisionProgram}}
+  {{wizard/select-division-program previous=(action 'toFundingOp') next=(action 'toTypeFunding')}}
+{{/if}}
+
+{{#if selectTypeFunding}}
+  {{wizard/select-type-funding previous=(action 'toDivisionProgram')}}
+{{/if}}
+
+
+{{outlet}}
