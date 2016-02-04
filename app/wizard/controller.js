@@ -13,6 +13,8 @@ export default Ember.Controller.extend({
 
 
   actions: {
+
+    /*State Flow Control*/
     toFundingOp: function() {
       this.set('selectFundingOp', true);
       this.set('selectDivisionProgram', false);
@@ -30,6 +32,8 @@ export default Ember.Controller.extend({
       this.set('selectDivisionProgram', false);
       this.set('selectTypeFunding', true);
     }
+    /*End State Flow Control*/
+
   }
 
 

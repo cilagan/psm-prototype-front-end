@@ -1,39 +1,27 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-2 col-xs-offset-8">
-      <button class="btn btn-primary" type="button">Prepare New</button>
-    </div>
     <div class="col-xs-2">
-      <button class="btn btn-primary" type="button">Temp Prop ID</button>
+      {{#link-to "wizard" class="btn btn-primary"}}Create New Proposal{{/link-to}}
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <h1>Proposal Header Area</h1>
-    </div>
-  </div>
-
-
-
-
-<table>
-  <thead>
-    <tr>
-      <th>Proposal ID</th>
-      <th>Proposal Title</th>
-      <th colspan="2">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each model as |proposal|}}
-    <tr>
-    <td>{{#link-to "proposal" proposal}}{{proposal.tempPropId}}{{/link-to}}</td>
-    <td>{{proposal.proposalTitle}}</td>
-    <td><a href="#" {{action "delete" proposal}}>Delete</a></td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+  <table>
+    <thead>
+      <tr>
+        <th>Proposal ID</th>
+        <th>Proposal Title</th>
+        <th colspan="2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |proposal|}}
+      <tr>
+      <td>{{#link-to "proposal" proposal}}{{proposal.tempPropId}}{{/link-to}}</td>
+      <td>{{proposal.proposalTitle}}</td>
+      <td><a href="#" {{action "delete" proposal}}>Delete</a></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
 
 </div>
