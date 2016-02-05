@@ -1,29 +1,47 @@
-<h2>Select Funding Opportunity</h2>
 
-<p>
-  <h4>Directorates</h4>
-  <ul>
-    {{#each directorates as |directorate|}}
-    <li>
-      {{directorate.description}}
-    </li>
-    {{/each}}
-  </ul>
-</p>
+<div class="col-xs-12">
+  <h2>Select Funding Opportunity</h2>
+</div>
 
+<div class="col-xs-10 col-xs-offset-1">
 
-<p>
-  <h4>Funding Opportunities</h4>
-  <ul>
-    {{#each fundingOps as |fundingOp|}}
-    <li>
-      {{fundingOp.title}}
-    </li>
-    {{/each}}
-  </ul>
-</p>
+  <p>
+    <h4>Directorates</h4>
+    <ul>
+      {{#each directorates as |directorate|}}
+      <li>
+        {{directorate.description}}
+      </li>
+      {{/each}}
+    </ul>
+  </p>
 
 
-<a href="#" {{action 'next'}}>Next</a>
+  <p>
+    <h4>Funding Opportunities</h4>
+
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <th>Select</th>
+        <th>Solicitation Number</th>
+        <th>Program Announcement</th>
+      </thead>
+      <tbody>
+        {{#each fundingOps as |fundingOp|}}
+          <tr>
+            <td>radio-button-goes-here</td>
+            <td>{{fundingOp.code}}</td>
+            <td>{{fundingOp.title}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </p>
+
+  <button class="btn btn-primary" {{action 'next'}}>Next</button>
+
+</div>
+
+
 
 {{yield}}

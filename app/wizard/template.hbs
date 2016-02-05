@@ -1,17 +1,29 @@
-<h1>Wizard Creation Base Template</h1>
+
+<div class="container">
+
+<div class="row">
+  <div class="col-xs-4">
+    <h1>Create New Proposal</h1>
+  </div>
+</div>
+
+<div class="row">
 
 
-{{#if selectFundingOp}}
-  {{wizard/select-funding-op fundingOps=model.fundingOps directorates=model.directorates next=(action 'toDivisionProgram')}}
-{{/if}}
+    {{#if selectFundingOp}}
+      {{wizard/select-funding-op fundingOps=model.fundingOps directorates=model.directorates next=(action 'toDivisionProgram')}}
+    {{/if}}
 
-{{#if selectDivisionProgram}}
-  {{wizard/select-division-program previous=(action 'toFundingOp') next=(action 'toTypeFunding')}}
-{{/if}}
+    {{#if selectDivisionProgram}}
+      {{wizard/select-division-program previous=(action 'toFundingOp') next=(action 'toTypeFunding')}}
+    {{/if}}
 
-{{#if selectTypeFunding}}
-  {{wizard/select-type-funding previous=(action 'toDivisionProgram')}}
-{{/if}}
+    {{#if selectTypeFunding}}
+      {{wizard/select-type-funding previous=(action 'toDivisionProgram')}}
+    {{/if}}
 
+</div>
 
 {{outlet}}
+
+</div>

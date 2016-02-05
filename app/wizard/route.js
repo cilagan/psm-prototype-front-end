@@ -6,7 +6,7 @@ export default Ember.Route.extend({
 
     let wizard = this.store.peekRecord('wizard');
 
-    if (wizard) { wizard = this.store.createRecord('wizard'); }
+    if (null == wizard) { wizard = this.store.createRecord('wizard'); }
 
     return Ember.RSVP.hash({
       wizard: wizard,
