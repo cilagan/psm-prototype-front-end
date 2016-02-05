@@ -1,8 +1,9 @@
 import Mirage from 'ember-cli-mirage';
 
 export default Mirage.Factory.extend({
+
   id(i) { return i; },
-  tempPropId(i) { return  i; },
-  content(i) { return `I am the ${i} Project Description.`;}
+  title(i) { return `Funding Opportunity ${i}`; },
+  code(i) { return `CODE-${i}`; }
 
 });

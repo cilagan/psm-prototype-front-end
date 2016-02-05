@@ -47,6 +47,32 @@ export default function() {
 
   this.del('/proposal/:proposal_id/cover-sheet', 'cover-sheet');
 
+
+  /* WIZARD */
+
+  this.get('/fundingops', function(db) {
+    return {
+      'wizard/funding-opportunity': db.fundingopportunities
+    };
+  });
+
+  this.get('/directorates', function(db) {
+    return {
+      'wizard/directorate': db.directorates
+    };
+  });
+
+
+
+
+
+
+
+
+
+
+
+
   /*
     Route shorthand cheatsheet
   */

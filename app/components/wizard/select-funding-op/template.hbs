@@ -1,5 +1,29 @@
 <h2>Select Funding Opportunity</h2>
 
+<p>
+  <h4>Directorates</h4>
+  <ul>
+    {{#each directorates as |directorate|}}
+    <li>
+      {{directorate.description}}
+    </li>
+    {{/each}}
+  </ul>
+</p>
+
+
+<p>
+  <h4>Funding Opportunities</h4>
+  <ul>
+    {{#each fundingOps as |fundingOp|}}
+    <li>
+      {{fundingOp.title}}
+    </li>
+    {{/each}}
+  </ul>
+</p>
+
+
 <a href="#" {{action 'next'}}>Next</a>
 
 {{yield}}

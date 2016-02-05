@@ -2,7 +2,7 @@
 
 
 {{#if selectFundingOp}}
-  {{wizard/select-funding-op next=(action 'toDivisionProgram')}}
+  {{wizard/select-funding-op fundingOps=model.fundingOps directorates=model.directorates next=(action 'toDivisionProgram')}}
 {{/if}}
 
 {{#if selectDivisionProgram}}
