@@ -5,6 +5,56 @@
 
 <div class="col-xs-10 col-xs-offset-1">
 
+  <p>
+    <h4>What would you like to prepare?</h4>
+    <ul>
+      <li>
+        {{#radio-button groupValue=wizard.type value="LOI" changed="setType"}}Letter of Intent{{/radio-button}}
+      </li>
+      <li>
+        {{#radio-button groupValue=wizard.type value="PP" changed="setType"}}Preliminary Proposal{{/radio-button}}
+      </li>
+      <li>
+        {{#radio-button groupValue=wizard.type value="FP" changed="setType"}}Full Proposal{{/radio-button}}
+      </li>
+    </ul>
+  </p>
+
+  <p>
+    <h4>What funding mechanism will be used?</h4>
+    <ul>
+      <li>
+        {{#radio-button groupValue=wizard.fundingMech value="Research" changed="setFundingMech"}}Research{{/radio-button}}
+      </li>
+      <li>
+        {{#radio-button groupValue=wizard.fundingMech value="Conferences" changed="setFundingMech"}}Conferences{{/radio-button}}
+      </li>
+      <li>
+        {{#radio-button groupValue=wizard.fundingMech value="EAGER" changed="setFundingMech"}}EAGER{{/radio-button}}
+      </li>
+      <li>
+        {{#radio-button groupValue=wizard.fundingMech value="Equipment" changed="setFundingMech"}}Equipment{{/radio-button}}
+      </li>
+      <li>
+        {{#radio-button groupValue=wizard.fundingMech value="FacilityCenter" changed="setFundingMech"}}Facility / Center{{/radio-button}}
+      </li>
+      <li>
+        {{#radio-button groupValue=wizard.fundingMech value="Fellowship" changed="setFundingMech"}}Fellowship{{/radio-button}}
+      </li>
+      <li>
+        {{#radio-button groupValue=wizard.fundingMech value="Ideas Lab" changed="setFundingMech"}}Ideas Lab{{/radio-button}}
+      </li>
+      <li>
+        {{#radio-button groupValue=wizard.fundingMech value="Internation Travel" changed="setFundingMech"}}Internation Travel{{/radio-button}}
+      </li>
+      <li>
+        {{#radio-button groupValue=wizard.fundingMech value="RAPID" changed="setFundingMech"}}RAPID{{/radio-button}}
+      </li>
+    </ul>
+  </p>
+
+
+
   <!-- BODY -->
 
   <button class="btn btn-default" {{action 'previous'}}>Previous</button>
