@@ -29,7 +29,9 @@
       <tbody>
         {{#each fundingOps as |fundingOp|}}
           <tr>
-            <td>radio-button-goes-here</td>
+            <td>
+              {{radio-button groupValue=wizard.fundingOp value=fundingOp changed="setFundingOp"}}
+            </td>
             <td>{{fundingOp.code}}</td>
             <td>{{fundingOp.title}}</td>
           </tr>
@@ -39,6 +41,7 @@
   </p>
 
   <button class="btn btn-primary" {{action 'next'}}>Next</button>
+
 
 </div>
 
