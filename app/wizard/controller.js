@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   selectTypeFunding: false,
 
 
+
   // states = ['selectFundingOp', 'selectDivisionProgram'];
   // currentState = states[0];
 
