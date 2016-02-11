@@ -9,13 +9,12 @@
 
 <div class="row">
 
-
     {{#if selectFundingOp}}
       {{wizard/select-funding-op wizard=model.wizard fundingOps=model.fundingOps directorates=model.directorates next=(action 'toDivisionProgram')}}
     {{/if}}
 
     {{#if selectDivisionProgram}}
-      {{wizard/select-division-program wizard=model.wizard divisions=model.divisions programs=model.programs previous=(action 'toFundingOp') next=(action 'toTypeFunding')}}
+      {{wizard/select-division-program previous=(action 'toFundingOp') next=(action 'toTypeFunding')}}
     {{/if}}
 
     {{#if selectTypeFunding}}
