@@ -38,6 +38,7 @@
     "ember-data": "2.2.1",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
+    "ember-multiselect-checkboxes": "0.8.0",
     "ember-radio-button": "1.0.7",
     "ember-truth-helpers": "1.2.0"
   }
