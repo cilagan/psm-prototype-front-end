@@ -62,7 +62,34 @@ export default function() {
     };
   });
 
+this.get('/divisions', function(db) {
+    return {
+      'wizard/division' : db.divisions
+    };
+});
 
+//retrieve division and associated program
+//TODO need to pull more than one program record, query based on div id
+this.get('/division/:division_id', function(db, request) {
+  var division_Id = +request.params.division_id;
+  return {
+    'wizard/division': db.divisions.find(division_Id),
+    'wizard/program': db.programs.find(division_Id)
+  };
+});
+
+this.get('/programs', function(db) {
+    return {
+      'wizard/program' : db.programs
+    };
+});
+
+this.get('/programs/:program_id', function(db, request) {
+    var program_Id = request.params.program_id;
+    return {
+      'wizard/program' : db.programs.find(program_Id)
+    };
+});
 
 
 

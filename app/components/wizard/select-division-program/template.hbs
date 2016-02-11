@@ -7,8 +7,41 @@
 
   <!-- BODY -->
 
-  <button class="btn btn-default" {{action 'previous'}}>Previous</button>
+  <p>
+    <h4>Divisions</h4>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <th>Division</th>
+      </thead>
+      <tbody>
+        {{#each divisions as |division|}}
+          <tr>
+            <td>{{division.description}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </p>
 
+
+<!--  <p>
+    <h4>Programs</h4>
+
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <th>Program</th>
+      </thead>
+      <tbody>
+        {{#each programs as |program|}}
+          <tr>
+            <td>{{program.description}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </p>
+-->
+  <button class="btn btn-default" {{action 'previous'}}>Previous</button>
   <button class="btn btn-primary" {{action 'next'}}>Next</button>
 
 </div>
