@@ -62,11 +62,17 @@ export default function() {
     };
   });
 
-this.get('/divisions', function(db) {
-    return {
-      'wizard/division' : db.divisions
-    };
-});
+  this.get('/divisions', function(db) {
+      return {
+        'wizard/division' : db.divisions
+      };
+  });
+
+  this.get('/programs', function(db) {
+      return {
+        'wizard/program' : db.programs
+      };
+  });
 
 //retrieve division and associated program
 //TODO need to pull more than one program record, query based on div id

@@ -9,7 +9,7 @@ export default Ember.Component.extend({
 
 
 //pull the divsions we need from the store/server
-  init:function(){
+  /*init:function(){
     this._super();
     //get funding op selection from wizard
     let foId = this.get('wizard.fundingOp.code');
@@ -47,7 +47,7 @@ export default Ember.Component.extend({
     //this.set('programs', programs);
 
 
-  },
+  },*/
   actions: {
     next: function() {
       this.sendAction('next');

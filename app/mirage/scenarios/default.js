@@ -8,8 +8,11 @@ export default function( server ) {
 
   server.loadFixtures('directorates');
 
-  server.loadFixtures('divisions');
-  server.loadFixtures('programs');
+  server.createList('division', 8);
+  server.createList('program', 10);
+
+  // server.loadFixtures('divisions');
+  // server.loadFixtures('programs');
   // Seed your development database using your factories. This
   // data will not be loaded in your tests.
 

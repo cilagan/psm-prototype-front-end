@@ -7,6 +7,6 @@ export default DS.Model.extend({
 
   directorates: DS.attr(),
 
-  divisions: DS.hasMany('divisions', {async: true})
+  divisions: DS.hasMany('wizard/division', {async: true})
 
 });

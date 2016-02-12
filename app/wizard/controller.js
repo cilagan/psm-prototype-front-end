@@ -25,6 +25,17 @@ export default Ember.Controller.extend({
       this.set('selectFundingOp', false);
       this.set('selectDivisionProgram', true);
       this.set('selectTypeFunding', false);
+
+      let model = this.get('model');
+
+      let wizard = model.wizard;
+
+      let fundingOp = wizard.get('fundingOp');
+
+      let divisions = fundingOp.get('divisions');
+
+      this.set("workingDivisions", divisions);
+
     },
 
     toTypeFunding: function() {
