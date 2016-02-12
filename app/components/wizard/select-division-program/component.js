@@ -25,7 +25,6 @@ export default Ember.Component.extend({
 
       let programs = division.get('programs');
       this.set("workingProgs", programs);
-
     },
     selectProgram: function() {
 
