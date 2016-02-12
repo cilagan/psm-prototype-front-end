@@ -24,11 +24,13 @@
     {{else}}
       <select onchange={{action "selectProgram" value="target.value"}}>
         <option>--Select One--</option>
-        {{#each workingProgs as |programChoice|}}
-          <option value={{programChoice}} selected={{eq currProgramSelection programChoice}}>{{programChoice.description}}</option>
+        {{#each availablePrograms as |programChoice|}}
+          <option value={{index}} selected={{eq currProgramSelection programChoice}}>{{programChoice.description}}</option>
         {{/each}}
     </select>
     {{/if}}
+
+    <a href="#" {{action "addProgramField"}}>Select additional program</a>
   </p>
 
   <!-- <p>Select Program
