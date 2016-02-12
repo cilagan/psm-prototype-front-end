@@ -3,11 +3,11 @@ import Ember from 'ember';
 export default Ember.Component.extend({
  store: Ember.inject.service(),
  workingDivs: [],
- workingProgs: [],
- selectedPrograms: [],
+
  currDivSelection: null,
  currProgSelection: null,
 
+ workingProgs: [],
  selectedPrograms: [],
  availablePrograms: [],
 
@@ -54,8 +54,8 @@ export default Ember.Component.extend({
       let currentProgram = this.get('currProgSelection');
       if (program !== currentProgram) {
         this.selectedPrograms.removeObject(currentProgram);
-        this.selectedPrograms.pushObject(program);
         this.set('currProgSelection', program);
+        this.selectedPrograms.pushObject(program);
       }
     },
     addProgramField: function() {
