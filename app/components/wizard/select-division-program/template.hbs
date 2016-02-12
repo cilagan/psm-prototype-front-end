@@ -7,40 +7,40 @@
 
   <!-- BODY -->
 
-  <p>
-    <h4>Divisions</h4>
-    <table class="table table-striped table-bordered table-hover">
-      <thead>
-        <th>Division</th>
-      </thead>
-      <tbody>
-        {{#each divisions as |division|}}
-          <tr>
-            <td>{{division.description}}</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+  <p>Select Division
+    <select onchange={{action "selectDivision" value="target.value"}}>
+      <option>--Select One--</option>
+      {{#each workingDivs as |divisionChoice index|}}
+        <option value={{index}} selected={{eq currDivSelection divisionChoice}}>{{divisionChoice.description}}</option>
+      {{/each}}
+    </select>
   </p>
 
-
-<!--  <p>
-    <h4>Programs</h4>
-
-    <table class="table table-striped table-bordered table-hover">
-      <thead>
-        <th>Program</th>
-      </thead>
-      <tbody>
-        {{#each programs as |program|}}
-          <tr>
-            <td>{{program.description}}</td>
-          </tr>
+  <p>Select Program
+    {{#if (eq currDivSelection null) }}
+    <select disabled>
+      <option>Select Division first</option>
+    </select>
+    {{else}}
+      <select onchange={{action "selectProgram" value="target.value"}}>
+        <option>--Select One--</option>
+        {{#each workingProgs as |programChoice|}}
+          <option value={{programChoice}} selected={{eq currProgramSelection programChoice}}>{{programChoice.description}}</option>
         {{/each}}
-      </tbody>
-    </table>
+    </select>
+    {{/if}}
   </p>
--->
+
+  <!-- <p>Select Program
+    <select onchange={{action "selectDivision" value="target.value"}}>
+      {{#each workingDivs as |divisionChoice|}}
+        <option value={{divisionChoice}} selected={{eq currDivSelection divisionChoice}}>{{divisionChoice.description}}</option>
+      {{/each}}
+    </select>
+  </p> -->
+
+
+
   <button class="btn btn-default" {{action 'previous'}}>Previous</button>
   <button class="btn btn-primary" {{action 'next'}}>Next</button>
 
