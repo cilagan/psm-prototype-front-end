@@ -23,15 +23,14 @@ export default Ember.Component.extend({
 
     if (Ember.isEmpty(selectedPrograms)) {
       this.set('availablePrograms', allPrograms);
+    } else {
+      this.allPrograms.forEach(function(m) {
+        if (!selectedPrograms.contains(m)) {
+          output.pushObject(m);
+        }
+      });
+      this.set('availablePrograms', output);
     }
-
-    this.allPrograms.forEach(function(m) {
-      if (!selectedPrograms.contains(m)) {
-        output.pushObject(m);
-      }
-    });
-    this.set('availablePrograms', output);
-
   }.observes('selectedPrograms.[]', 'workingProgs.isLoaded'),
 
   actions: {
@@ -52,10 +51,11 @@ export default Ember.Component.extend({
     selectProgram: function(programIndex) {
       let workingProgs = this.get("workingProgs");
       let program = workingProgs.objectAt(programIndex);
-      if (program !== this.get('currProgSelection')) {
-          workingProgs.pushObject(this.get('currProgSelection'));
-          this.set('currProgSelection', program);
-          workingProgs.removeObject(program);
+      let currentProgram = this.get('currProgSelection');
+      if (program !== currentProgram) {
+        this.selectedPrograms.removeObject(currentProgram);
+        this.selectedPrograms.pushObject(program);
+        this.set('currProgSelection', program);
       }
     },
     addProgramField: function() {

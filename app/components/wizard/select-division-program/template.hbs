@@ -24,7 +24,7 @@
     {{else}}
       <select onchange={{action "selectProgram" value="target.value"}}>
         <option>--Select One--</option>
-        {{#each availablePrograms as |programChoice|}}
+        {{#each availablePrograms as |programChoice index|}}
           <option value={{index}} selected={{eq currProgramSelection programChoice}}>{{programChoice.description}}</option>
         {{/each}}
     </select>
