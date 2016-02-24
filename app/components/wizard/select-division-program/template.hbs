@@ -7,42 +7,67 @@
 
   <!-- BODY -->
 
-  <p>Select Division
-    <select onchange={{action "selectDivision" value="target.value"}}>
-      <option>--Select One--</option>
-      {{#each workingDivs as |divisionChoice index|}}
-        <option value={{index}} selected={{eq currDivSelection divisionChoice}}>{{divisionChoice.description}}</option>
-      {{/each}}
-    </select>
-  </p>
+  {{#each chosenDivs as |aDivision divisionIndex|}}
 
-  <p>Select Program
-    {{#if (eq currDivSelection null) }}
-    <select disabled>
-      <option>Select Division first</option>
-    </select>
-    {{else}}
-      <select onchange={{action "selectProgram" value="target.value"}}>
-        <option>--Select One--</option>
-        {{#each availablePrograms as |programChoice index|}}
-          <option value={{index}} selected={{eq currProgramSelection programChoice}}>{{programChoice.description}}</option>
+    <p>Select Division
+      <select id="division{{divisionIndex}}" onchange={{action "selectDivision" value="target.value"}}>
+        <option value="{{divisionIndex}}_">--Select One--</option>
+
+        {{#each aDivision.[1] as |divisionChoice divisionChoiceIndex|}}
+          <option value="{{divisionIndex}}_{{divisionChoiceIndex}}" selected={{eq aDivision.[0] divisionChoice}}>{{divisionChoice.description}}</option>
         {{/each}}
-    </select>
+      </select>
+
+      {{#if (gt chosenDivs.length 1)}}
+      <a href="#" {{action "removeDivision" divisionIndex}}>Remove Division and associated programs</a>
+      {{/if}}
+
+    </p>
+
+
+
+    {{#if (eq aDivision.[0] null) }}
+      <p>Select Program
+        <select disabled>
+          <option>Select Division first</option>
+        </select>
+      </p>
+    {{else}}
+      <p>Select Program
+
+      {{#each aDivision.[0].chosenPrograms as |aProgram programIndex|}}
+        <select onchange={{action "selectProgram" value="target.value"}}>
+          <option>--Select One--</option>
+          {{#each aProgram.[1] as |programChoice programChoiceIndex|}}
+            <option value={{programChoiceIndex}} selected={{eq currProgramSelection programChoice}}>{{programChoice.description}}</option>
+          {{/each}}
+        </select>
+        {{#if (gt aDivision.[0].chosenPrograms.length 1)}}
+          <a href="#" {{action "removeProgram" programChoiceIndex}}>Remove program</a>
+        {{/if}}
+
+         <br/>
+      {{/each}}
+
+      <a href="#" {{action "addProgramField" divisionIndex}}>Select additional program</a>
+      </p>
+
     {{/if}}
 
-    <a href="#" {{action "addProgramField"}}>Select additional program</a>
-  </p>
-
-  <!-- <p>Select Program
-    <select onchange={{action "selectDivision" value="target.value"}}>
-      {{#each workingDivs as |divisionChoice|}}
-        <option value={{divisionChoice}} selected={{eq currDivSelection divisionChoice}}>{{divisionChoice.description}}</option>
-      {{/each}}
-    </select>
-  </p> -->
 
 
+    {{/each}}
 
+
+  {{#unless (eq allDivs.length chosenDivs.length) }}
+      <p>
+        <a href="#" {{action "addDivision"}}>Select additional division</a>
+      </p>
+  {{/unless}}
+
+
+
+<!-- Wizard Navigation -->
   <button class="btn btn-default" {{action 'previous'}}>Previous</button>
   <button class="btn btn-primary" {{action 'next'}}>Next</button>
 
