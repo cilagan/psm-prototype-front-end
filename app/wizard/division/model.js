@@ -6,8 +6,8 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   programs: DS.hasMany('wizard/program', {async: true}),
 
-  chosenPrograms: [], //[selectedProgram, arrayofAvailablePrograms]
-  selectedPrograms: [],
+  chosenPrograms: Ember.computed( function() { return []; } ), //[selectedProgram, arrayofAvailablePrograms]
+  selectedPrograms: Ember.computed( function() { return []; } ),
 
   availablePrograms: function() {
     let allPrograms = this.get('programs');
@@ -17,7 +17,7 @@ export default DS.Model.extend({
     if (Ember.isEmpty(selectedPrograms)) {
       output = allPrograms.slice(0);
     } else {
-      this.allPrograms.forEach(function(m) {
+      allPrograms.forEach(function(m) {
         if (!selectedPrograms.contains(m)) {
           output.pushObject(m);
         }
@@ -26,15 +26,15 @@ export default DS.Model.extend({
     return output;
   },
   addProgram: function () {
-    let chosenPrograms = this.chosenPrograms;
+    let chosenPrograms = this.get('chosenPrograms');
     let availablePrograms = this.availablePrograms();
-    chosenPrograms.pushObject([null, availablePrograms]);
+    this.get('chosenPrograms').pushObject([null, availablePrograms]);
   },
   addProgramBackToAvailablePrograms: function(program) {
-    let selectedPrograms = this.selectedPrograms;
+    let selectedPrograms = this.get('selectedPrograms');
     selectedPrograms.removeObject(program);
 
-    let chosenPrograms = this.chosenPrograms;
+    let chosenPrograms = this.get('chosenPrograms');
     chosenPrograms.forEach(function(item, index) {
         let availablePrograms = item[1];
         if (!availablePrograms.contains(program)){
@@ -43,22 +43,49 @@ export default DS.Model.extend({
     });
   },
   removeProgram: function(chosenProgramIndex) {
+    let chosenPrograms = this.get('chosenPrograms');
+    // if( chosenPrograms.length > 1 ) { //long enough to remove a program and still have at least one program
+      let removeBundle = chosenPrograms[chosenProgramIndex];
+      let removeProgram = removeBundle[0];
+      chosenPrograms.removeObject(removeBundle);
+      if (removeProgram !== null){
+        this.addProgramBackToAvailablePrograms(removeProgram);
+      }
+    // }
+  },
+  selectProgram: function(programIndex, programChoiceIndex) {
+    let chosenPrograms = this.get('chosenPrograms');
 
-    let chosenPrograms = this.chosenPrograms;
-    let removeBundle = chosenPrograms[chosenProgramIndex];
-    let removeProgram = removeBundle[0];
+      //is something there?
+      let previousProgramChoice = chosenPrograms[programIndex][0];
+      if (previousProgramChoice !== null) {
+        this.addProgramBackToAvailablePrograms(previousProgramChoice);
+      }
 
-    chosenPrograms.removeObject(removeBundle);
+      let chosenProgram = (programChoiceIndex && !isNaN(programChoiceIndex)) ? chosenPrograms[programIndex][1][programChoiceIndex] : null;
 
-    if (removeProgram !== null){
-      this.addProgramBackToAvailablePrograms(removeProgram);
-    }
+      //set the chosenProgram
+      let toSet = chosenPrograms[programIndex];
+      Ember.set(toSet, "0", chosenProgram);
+
+      if (chosenProgram !== null) {
+        this.get('selectedPrograms').pushObject(chosenProgram);
+
+        //remove the chosenProgram from every other availablePrograms
+        chosenPrograms.forEach(function(item, index) {
+          if (item[0] !== chosenProgram) {
+            let availablePrograms = item[1];
+            if (availablePrograms.contains(chosenProgram)){
+              availablePrograms.removeObject(chosenProgram);
+            }
+          }
+        });
+      }
   },
 
-  //methods
   clearSelectedPrograms: function() {
-    this.selectedPrograms = [];
+    this.set('selectedPrograms',[]);
+    this.set('chosenPrograms',[]);
   }
-
 
 });

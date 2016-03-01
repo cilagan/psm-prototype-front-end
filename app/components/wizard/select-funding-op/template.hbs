@@ -5,17 +5,6 @@
 
 <div class="col-xs-10 col-xs-offset-1">
 
-  <!-- <p>
-    <h4>Directorates</h4>
-    <ul>
-      {{#each directorates as |directorate|}}
-      <li>
-        <label for={{directorate.description}}>{{input type="checkbox" name=directorate.description id=directorate.description}}{{directorate.description}}</label>
-      </li>
-      {{/each}}
-    </ul>
-  </p> -->
-
   <p>
     <h4>Directorates</h4>
     <a href="#" {{action "checkAll"}}>Select All</a>
@@ -54,31 +43,8 @@
     </table>
   </p>
 
-
-<!-- FOR TESTING -->
-<!-- <table class="table table-striped table-bordered table-hover">
-  <thead>
-    <th>Select</th>
-    <th>Solicitation Number</th>
-    <th>Program Announcement</th>
-  </thead>
-  <tbody>
-    {{#each originalList as |ol|}}
-      <tr>
-        <td></td>
-        <td>{{ol.id}}</td>
-        <td>{{ol.title}}</td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table> -->
-
-
   <button class="btn btn-primary" {{action 'next'}}>Next</button>
 
-
 </div>
-
-
 
 {{yield}}

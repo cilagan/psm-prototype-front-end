@@ -2,25 +2,30 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
- allDivs: [], //all the divisions for the Funding Op
+ errorMessage: null,
 
- chosenDivs: [], //[selectedDiv, array of availableDivs]
+ allDivs: Ember.computed( function() { return []; } ), //all the divisions for the Funding Op
 
- selectedDivs: [],
+ chosenDivs: Ember.computed( function() { return []; } ), //[selectedDiv, array of availableDivs]
 
+ selectedDivs: Ember.computed( function() { return []; } ),
+
+ chosenDivLengthMinusOne : Ember.computed('chosenDivs.[]', function() {
+   return this.get('chosenDivs').length - 1;
+  }),
 
   willInsertElement: function() {
     let allDivs = this.get('workingDivisions');
     this.set('allDivs', allDivs);
-    if (Ember.isEmpty(this.chosenDivs)) {
+    if (Ember.computed.empty('this.chosenDivs')) {
       let firstDiv = [null , allDivs.slice(0)]; //chosenDiv, rest of the availableDivs
-      this.chosenDivs.pushObject(firstDiv);
+      this.get('chosenDivs').pushObject(firstDiv);
     }
   },
 
   availableDivs: function() {
-    let allDivs = this.allDivs;
-    let selectedDivs = this.selectedDivs;
+    let allDivs = this.get('allDivs');
+    let selectedDivs = this.get('selectedDivs');
 
     let output = [];
 
@@ -35,12 +40,13 @@ export default Ember.Component.extend({
     }
     return output;
   },
+
   addDivBackToAvailableDivs: function(div) {
-    let selectedDivs = this.selectedDivs;
+    let selectedDivs = this.get('selectedDivs');
     selectedDivs.removeObject(div);
 
-    let chosenDivs = this.chosenDivs;
-    chosenDivs.forEach(function(item, index) {
+    let chosenDivs = this.get('chosenDivs');
+    chosenDivs.forEach(function(item/*, index*/) {
         let availableDivs = item[1];
         if (!availableDivs.contains(div)){
           availableDivs.pushObject(div);
@@ -48,34 +54,52 @@ export default Ember.Component.extend({
     });
   },
 
-  availablePrograms: function() {
-    let allPrograms = this.workingProgs;
-    let selectedPrograms = this.selectedPrograms;
-
-    let output = [];
-
-    if (Ember.isEmpty(selectedPrograms)) {
-      this.set('availablePrograms', allPrograms);
-    } else {
-      this.allPrograms.forEach(function(m) {
-        if (!selectedPrograms.contains(m)) {
-          output.pushObject(m);
-        }
-      });
-      this.set('availablePrograms', output);
-    }
-  }.observes('selectedPrograms.[]', 'workingProgs.isLoaded'),
-
   actions: {
     next: function() {
-      this.sendAction('next');
+      let chosenDivs = this.get('chosenDivs');
+      let self = this;
+      debugger;
+
+      let errorMsg = "";
+
+      //for each chosenDiv[i][0], <-- this is the div
+      //get the chosenDiv[i][0].get('chosenPrograms'), <-- chosenPrograms
+      //for each chosenPrograms[j][0] <-- this is the program
+      chosenDivs.forEach( function(d) {
+        let div = d[0];
+        if (div === null) {
+          self.send('removeDivision',chosenDivs.indexOf(d) );
+        } else {
+          let chosenPrograms = div.get('chosenPrograms');
+          chosenPrograms.forEach( function(p) {
+            let program = p[0];
+            if (program === null && chosenPrograms.length > 1) {
+              chosenPrograms.removeObject(p);
+            } else if (program === null && chosenPrograms.length === 1) {
+              errorMsg += "<p>Every Division must have a Program selected.</p>";
+            }
+          });
+        }
+      });
+
+      if (chosenDivs[0][0] === null ) {
+        errorMsg = "<p>Select a Division and a Program.</p>" + errorMsg;
+      }
+
+      if (errorMsg) {
+        this.set('errorMessage', errorMsg.htmlSafe());
+      }
+      else {
+        this.set('errorMessage', null);
+        // this.sendAction('next');
+      }
     },
     previous: function() {
       this.sendAction('previous');
     },
 
     selectDivision: function(divisionIndex) {
-        let chosenDivs = this.chosenDivs;
+        let chosenDivs = this.get('chosenDivs');
 
         let indices = divisionIndex.split("_");
 
@@ -85,6 +109,7 @@ export default Ember.Component.extend({
         //is something there?
         let previousDivChoice = chosenDivs[chosenDivsIndex][0];
         if (previousDivChoice !== null) {
+          previousDivChoice.clearSelectedPrograms();
           this.addDivBackToAvailableDivs(previousDivChoice);
         }
 
@@ -95,10 +120,10 @@ export default Ember.Component.extend({
         Ember.set(toSet, "0", chosenDiv);
 
         if (chosenDiv !== null) {
-          this.selectedDivs.pushObject(chosenDiv);
+          this.get('selectedDivs').pushObject(chosenDiv);
 
           //remove the chosenDiv from every other availableDivs
-          chosenDivs.forEach(function(item, index) {
+          chosenDivs.forEach(function(item/*, index*/) {
             if (item[0] !== chosenDiv) {
               let availableDivs = item[1];
               if (availableDivs.contains(chosenDiv)){
@@ -107,54 +132,45 @@ export default Ember.Component.extend({
             }
           });
       }
-
-      if(Ember.isEmpty(chosenDiv.chosenPrograms)) {
+      if (Ember.computed.empty('chosenDiv.chosenPrograms')) {
         chosenDiv.addProgram();
       }
-
     },
     addDivision: function () {
-      let chosenDivs = this.chosenDivs;
+      let chosenDivs = this.get('chosenDivs');
       let availableDivs = this.availableDivs();
       chosenDivs.pushObject([null, availableDivs]);
     },
     removeDivision: function(chosenDivIndex) {
-
-      let chosenDivs = this.chosenDivs;
-      let removeBundle = chosenDivs[chosenDivIndex];
-      let removeDiv = removeBundle[0];
-
-      chosenDivs.removeObject(removeBundle);
-
-      if (removeDiv !== null){
-        this.addDivBackToAvailableDivs(removeDiv);
+      let chosenDivs = this.get('chosenDivs');
+      if (chosenDivs.length > 1 ) { //long enough to remove a div and still have at least one div
+        let removeBundle = chosenDivs[chosenDivIndex];
+        let removeDiv = removeBundle[0];
+        chosenDivs.removeObject(removeBundle);
+        if (removeDiv !== null){
+          removeDiv.clearSelectedPrograms();
+          this.addDivBackToAvailableDivs(removeDiv);
+        }
       }
     },
-
-
-    selectProgram: function(programIndex) {
-
-      // let workingProgs = this.get("workingProgs");
-      // let program = workingProgs.objectAt(programIndex);
-      // let currentProgram = this.get('currProgSelection');
-      // if (program !== currentProgram) {
-      //   this.selectedPrograms.removeObject(currentProgram);
-      //   this.set('currProgSelection', program);
-      //   this.selectedPrograms.pushObject(program);
-      // }
+    selectProgram: function(index) {
+      let indices = index.split("_");
+      let divisionIndex = indices[0];
+      let programIndex = indices[1];
+      let programChoiceIndex = indices[2];
+      let chosenDivs = this.get('chosenDivs');
+      let div = chosenDivs[divisionIndex][0];
+      div.selectProgram(programIndex, programChoiceIndex);
     },
     addProgramField: function(divisionIndex) {
-      let chosenDivs = this.chosenDivs;
+      let chosenDivs = this.get('chosenDivs');
       let div = chosenDivs[divisionIndex][0];
       div.addProgram();
     },
     removeProgram: function(divisionIndex, programIndex) {
-      let chosenDivs = this.chosenDivs;
+      let chosenDivs = this.get('chosenDivs');
       let div = chosenDivs[divisionIndex][0];
-
       div.removeProgram(programIndex);
-
     }
   }
-
 });
