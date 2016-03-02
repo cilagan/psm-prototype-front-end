@@ -26,7 +26,7 @@ export default DS.Model.extend({
     return output;
   },
   addProgram: function () {
-    let chosenPrograms = this.get('chosenPrograms');
+    // let chosenPrograms = this.get('chosenPrograms');
     let availablePrograms = this.availablePrograms();
     this.get('chosenPrograms').pushObject([null, availablePrograms]);
   },
@@ -35,7 +35,7 @@ export default DS.Model.extend({
     selectedPrograms.removeObject(program);
 
     let chosenPrograms = this.get('chosenPrograms');
-    chosenPrograms.forEach(function(item, index) {
+    chosenPrograms.forEach(function(item/*, index*/) {
         let availablePrograms = item[1];
         if (!availablePrograms.contains(program)){
           availablePrograms.pushObject(program);
@@ -72,7 +72,7 @@ export default DS.Model.extend({
         this.get('selectedPrograms').pushObject(chosenProgram);
 
         //remove the chosenProgram from every other availablePrograms
-        chosenPrograms.forEach(function(item, index) {
+        chosenPrograms.forEach(function(item/*, index*/) {
           if (item[0] !== chosenProgram) {
             let availablePrograms = item[1];
             if (availablePrograms.contains(chosenProgram)){

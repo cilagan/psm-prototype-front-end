@@ -15,9 +15,17 @@ export default Ember.Component.extend({
   sortProperty: "id",
   prevSortProp: null,
 
+  //messages
+  errorMessage: null,
+
   willInsertElement: function() {
     this.set('originalList', this.get('fundingOps'));
     this.set('selectedDirectorates', this.get('directorates').slice(0));
+    let wizard = this.get('wizard');
+    let currentFundingOp = wizard.get('fundingOp');
+    if (currentFundingOp) {
+      this.set('fundingOpChoice', currentFundingOp);
+    }
   },
 
   getFilteredModels: function(titleFilter, idFilter) {
@@ -105,23 +113,27 @@ export default Ember.Component.extend({
       });
       this.set('visibleFundingOps', output);
     }
-  }/*.observes('selectedDirectorates.[]')*/,
+  },
 
 
   actions: {
     next: function() {
 
       let wizard = this.get('wizard');
+      let currentFundingOp = wizard.get('fundingOp');
 
-      if (wizard.get('fundingOp') === undefined) {
-          alert("Pick a funding opportunity!");
+      let fundingOpChoice = this.get('fundingOpChoice');
+
+      if (fundingOpChoice === undefined) {
+        this.set('errorMessage', "Pick a funding opportunity.");
       } else {
-        this.sendAction('next');
+          if (!Ember.isEqual(fundingOpChoice, currentFundingOp)) {
+            wizard.set('fundingOp', fundingOpChoice);
+            wizard.set('chosenDivPrograms', null);
+          }
+          this.set('errorMessage', null);
+          this.sendAction('next');
       }
-    },
-    setFundingOp: function(fundingOp) {
-      let wizard = this.get('wizard');
-      wizard.set('fundingOp', fundingOp);
     },
     sortBy: function (property) {
       if ( this.sortProperty === property ) {
@@ -139,10 +151,3 @@ export default Ember.Component.extend({
     }
   }
 });
-
-
-//   obsCheckboxes: function(){
-//     alert("Something was checked");
-//     // this.set('checkedList', this.model.filterBy('isChecked', true));
-//   // }.observes('directorates'),
-// }.observes('this.selectedDirectorates'),

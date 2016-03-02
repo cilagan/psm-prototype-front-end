@@ -14,6 +14,12 @@
 
   </p>
 
+  {{#if errorMessage}}
+    <div class="alert alert-warning">
+      {{errorMessage}}
+    </div>
+  {{/if}}
+
   <p>
     <h4>Funding Opportunities</h4>
 
@@ -33,7 +39,7 @@
         {{#each visibleFundingOps as |fundingOp|}}
           <tr>
             <td>
-              {{radio-button groupValue=wizard.fundingOp value=fundingOp changed="setFundingOp"}}
+              {{radio-button groupValue=fundingOpChoice value=fundingOp}}
             </td>
             <td>{{fundingOp.id}}</td>
             <td>{{fundingOp.title}}</td>

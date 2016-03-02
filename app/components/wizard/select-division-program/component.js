@@ -15,11 +15,18 @@ export default Ember.Component.extend({
   }),
 
   willInsertElement: function() {
-    let allDivs = this.get('workingDivisions');
-    this.set('allDivs', allDivs);
-    if (Ember.computed.empty('this.chosenDivs')) {
-      let firstDiv = [null , allDivs.slice(0)]; //chosenDiv, rest of the availableDivs
+    let wizard = this.get('wizard');
+    let fundingOp = wizard.get('fundingOp');
+    let divisions = fundingOp.get('divisions');
+    this.set('allDivs', divisions);
+
+    let wizardChosenDivs = wizard.get('chosenDivPrograms');
+
+    if (Ember.isEmpty(wizardChosenDivs)) {
+      let firstDiv = [null , divisions.slice(0)]; //chosenDiv, rest of the availableDivs
       this.get('chosenDivs').pushObject(firstDiv);
+    } else {
+      this.set('chosenDivs', wizardChosenDivs);
     }
   },
 
@@ -54,11 +61,23 @@ export default Ember.Component.extend({
     });
   },
 
+  setChosenDivsToWizard: function() {
+    let wizard = this.get('wizard');
+    let chosenDivs = this.get('chosenDivs');
+
+    // let chosenDivPrograms = [];
+    //
+    // chosenDivs.forEach(function(d){
+    //   chosenDivPrograms.pushObject(d[0]);
+    // });
+
+    wizard.set('chosenDivPrograms', chosenDivs);
+  },
+
   actions: {
     next: function() {
       let chosenDivs = this.get('chosenDivs');
       let self = this;
-      debugger;
 
       let errorMsg = "";
 
@@ -91,10 +110,32 @@ export default Ember.Component.extend({
       }
       else {
         this.set('errorMessage', null);
-        // this.sendAction('next');
+        this.setChosenDivsToWizard();
+        this.sendAction('next');
       }
     },
     previous: function() {
+      let chosenDivs = this.get('chosenDivs');
+      let self = this;
+
+      //for each chosenDiv[i][0], <-- this is the div
+      //get the chosenDiv[i][0].get('chosenPrograms'), <-- chosenPrograms
+      //for each chosenPrograms[j][0] <-- this is the program
+      chosenDivs.forEach( function(d) {
+        let div = d[0];
+        if (div === null) {
+          self.send('removeDivision',chosenDivs.indexOf(d) );
+        } else {
+          let chosenPrograms = div.get('chosenPrograms');
+          chosenPrograms.forEach( function(p) {
+            let program = p[0];
+            if (program === null && chosenPrograms.length > 1) {
+              chosenPrograms.removeObject(p);
+            }
+          });
+        }
+      });
+
       this.sendAction('previous');
     },
 
