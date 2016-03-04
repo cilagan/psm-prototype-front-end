@@ -33,8 +33,24 @@
       <tbody>
         <tr>
           <td></td>
-          <td>{{input value=idFilter}}</td>
-          <td>{{input value=titleFilter}}</td>
+
+
+          <td>
+            <div class="input-group">
+              {{input value=idFilter}}
+              <span class=class="input-group-addon">
+                <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+              </span>
+            </div>
+          </td>
+          <td>
+            <div class="input-group">
+              {{input value=titleFilter}}
+              <span class=class="input-group-addon">
+                <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
+              </span>
+            </div>
+          </td>
         </tr>
         {{#each visibleFundingOps as |fundingOp|}}
           <tr>
