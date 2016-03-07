@@ -7,6 +7,15 @@ export default DS.Model.extend({
 
   directorates: DS.attr(),
 
-  divisions: DS.hasMany('wizard/division', {async: true})
+  divisions: DS.hasMany('wizard/division', {async: true}),
+
+  // let Person = Ember.Object.extend({
+  isEqual(other) {
+    if (other) {
+      return this.id == other.id;
+    } else return false;
+
+  }
+// });
 
 });
