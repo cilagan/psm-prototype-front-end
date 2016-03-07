@@ -50,7 +50,7 @@ export default Ember.Component.extend({
       }
 
       if (add) {
-          output.pushObject(m);
+        output.pushObject(m);
       }
     });
 
@@ -68,27 +68,27 @@ export default Ember.Component.extend({
   }.observes('titleFilter', 'idFilter', 'originalList.isLoaded', 'selectedDirectorates.[]'),
 
 
-  sortData: function(){
-    if ( this.sortProperty === null ){
-        Ember.Logger.warn(this.TAG, "sort property set to null");
-        this.setProperties({
-            sortAscending: true,
-            prevSortProp: null
-        });
-        return;
+  sortData: function() {
+    if (this.sortProperty === null) {
+      Ember.Logger.warn(this.TAG, "sort property set to null");
+      this.setProperties({
+        sortAscending: true,
+        prevSortProp: null
+      });
+      return;
     }
 
     var sortedArr = this.visibleFundingOps.sortBy(this.sortProperty);
 
-    if ( this.prevSortProp === this.sortProperty ){
-        var isAscending = this.sortAscending;
-        if ( isAscending ) {
-            sortedArr.reverse();
-        }
-        this.set('sortAscending', !isAscending);
+    if (this.prevSortProp === this.sortProperty) {
+      var isAscending = this.sortAscending;
+      if (isAscending) {
+        sortedArr.reverse();
+      }
+      this.set('sortAscending', !isAscending);
     } else {
-        this.set('sortAscending', true);
-        this.set('prevSortProp', this.sortProperty);
+      this.set('sortAscending', true);
+      this.set('prevSortProp', this.sortProperty);
     }
     this.set('visibleFundingOps', sortedArr);
   }.observes('sortProperty'),
@@ -103,10 +103,10 @@ export default Ember.Component.extend({
       this.originalList.forEach(function(m) {
         let fundingOpDirectorates = m.get('directorates');
         // selectedDirectorates.forEach(function(n)
-        for (let n = 0; n < selectedDirectorates.length; n++){
+        for (let n = 0; n < selectedDirectorates.length; n++) {
           if (fundingOpDirectorates.indexOf(selectedDirectorates.get(n).id) >= 0) {
-            if (output.indexOf(m) < 0 ) {
-                output.pushObject(m);
+            if (output.indexOf(m) < 0) {
+              output.pushObject(m);
             }
           }
         }
@@ -127,26 +127,25 @@ export default Ember.Component.extend({
       if (fundingOpChoice === undefined) {
         this.set('errorMessage', "Pick a funding opportunity.");
       } else {
-          if (!Ember.isEqual(fundingOpChoice, currentFundingOp)) {
-            wizard.set('fundingOp', fundingOpChoice);
-            wizard.set('chosenDivPrograms', null);
-          }
-          this.set('errorMessage', null);
-          this.sendAction('next');
+        if (!Ember.isEqual(fundingOpChoice, currentFundingOp)) {
+          wizard.set('fundingOp', fundingOpChoice);
+          wizard.set('chosenDivPrograms', null);
+        }
+        this.set('errorMessage', null);
+        this.sendAction('next');
       }
     },
-    sortBy: function (property) {
-      if ( this.sortProperty === property ) {
+    sortBy: function(property) {
+      if (this.sortProperty === property) {
         this.sortData();
-      }
-      else {
-          this.set('sortProperty', property);
+      } else {
+        this.set('sortProperty', property);
       }
     },
     checkAll: function() {
       this.set('selectedDirectorates', this.get('directorates').slice(0));
     },
-    uncheckAll: function () {
+    uncheckAll: function() {
       this.set('selectedDirectorates', []);
     }
   }

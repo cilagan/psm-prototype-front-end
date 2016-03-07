@@ -1,4 +1,3 @@
-
 <div class="col-xs-12">
   <h2>Select Funding Opportunity</h2>
 </div>
@@ -8,9 +7,7 @@
   <p>
     <h4>Directorates</h4>
     <a href="#" {{action "checkAll"}}>Select All</a>
-    <a href="#" {{action "uncheckAll"}}>Deselect All</a>
-
-    {{multiselect-checkboxes options=directorates labelProperty='description' selection=selectedDirectorates}}
+    <a href="#" {{action "uncheckAll"}}>Deselect All</a> {{multiselect-checkboxes options=directorates labelProperty='description' selection=selectedDirectorates}}
 
   </p>
 
