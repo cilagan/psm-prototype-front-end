@@ -12,8 +12,8 @@ export default DS.Model.extend({
   // let Person = Ember.Object.extend({
   isEqual(other) {
     if (other) {
-      return this.id == other.id;
-    } else return false;
+      return this.id === other.id;
+    } else { return false; }
 
   }
 // });

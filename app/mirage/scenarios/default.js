@@ -4,12 +4,12 @@ export default function( server ) {
   server.createList('coversheet', 5);
   server.createList('projectdescription', 5);
 
-  server.createList('fundingopportunity', 5);
+  server.createList('fundingopportunity', 1000);
 
   server.loadFixtures('directorates');
 
-  server.createList('division', 8);
-  server.createList('program', 10);
+  server.createList('division', 1000);
+  server.createList('program', 1000);
 
   // server.loadFixtures('divisions');
   // server.loadFixtures('programs');

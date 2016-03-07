@@ -5,7 +5,8 @@ export default Mirage.Factory.extend({
   id(i) { return i; },
   title(i) { return `Funding Opportunity ${i}`; },
   // code(i) { return `CODE-${i}`; }
-  directorates(i) {return [`${i}`, `${i+1}`];},
-  divisions(i) {return [`${i}`, `${i+1}`, `${i+2}`];}
+  directorates(i) {return [`${(i%7)+1}`];},
+  divisions(i) {return [`${i}`, `${i+1}`];}
+  // divisions(i) {return [`${i}`, `${i+1}`];}
 
 });
