@@ -27,38 +27,31 @@
       {{/if}}
 
     </p>
+    <p>Select Program
 
+      {{#each aDivision.[0].chosenPrograms as |aProgram programIndex|}}
+        <select onchange= {{action "selectProgram" value="target.value"}}>
+          <option>--Select One--</option>
+          {{#each aProgram.[1] as |programChoice programChoiceIndex|}}
+            <option value="{{divisionIndex}}_{{programIndex}}_{{programChoiceIndex}}" selected= {{eq aProgram.[0] programChoice}}>{{programChoice.description}}</option>
+          {{/each}}
+        </select>
+        {{#if (gt aDivision.[0].chosenPrograms.length 1)}}
+          <a href="#" {{action "removeProgram" divisionIndex programIndex}}>Remove program</a>
+        {{/if}}
 
-
-    {{#if (eq aDivision.[0] null) }}
-      <p>Select Program
+        <br/>
+        {{#if (not-eq aProgram.[0] null)}}
+          {{#unless (eq aDivision.[0].programs.length aDivision.[0].chosenPrograms.length) }}
+            <a href="#" {{action "addProgramField" divisionIndex}}>Select additional program</a>
+          {{/unless}}
+        {{/if}}
+      {{else}}
         <select disabled>
           <option>Select Division first</option>
         </select>
-      </p>
-    {{else}}
-      <p>Select Program
-
-        {{#each aDivision.[0].chosenPrograms as |aProgram programIndex|}}
-          <select onchange= {{action "selectProgram" value="target.value"}}>
-            <option>--Select One--</option>
-            {{#each aProgram.[1] as |programChoice programChoiceIndex|}}
-              <option value="{{divisionIndex}}_{{programIndex}}_{{programChoiceIndex}}" selected= {{eq aProgram.[0] programChoice}}>{{programChoice.description}}</option>
-            {{/each}}
-          </select>
-          {{#if (gt aDivision.[0].chosenPrograms.length 1)}}
-            <a href="#" {{action "removeProgram" divisionIndex programIndex}}>Remove program</a>
-          {{/if}}
-
-          <br/>
-          {{#if (not-eq aProgram.[0] null)}}
-            {{#unless (eq aDivision.[0].programs.length aDivision.[0].chosenPrograms.length) }}
-              <a href="#" {{action "addProgramField" divisionIndex}}>Select additional program</a>
-            {{/unless}}
-          {{/if}}
-        {{/each}}
-      </p>
-    {{/if}}
+      {{/each}}
+    </p>
 
     {{#if ( eq divisionIndex chosenDivLengthMinusOne )}}
       {{#unless (eq aDivision.[0] null) }}

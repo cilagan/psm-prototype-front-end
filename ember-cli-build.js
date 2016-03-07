@@ -18,21 +18,43 @@ module.exports = function(defaults) {
   app.import('bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js');
 
   /*Bootstrap Fonts*/
-  app.import('bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot', {
-    destDir: 'fonts/bootstrap'
+  // app.import('bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot', {
+  //   destDir: 'fonts/bootstrap'
+  // });
+  // app.import('bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.svg', {
+  //   destDir: 'fonts/bootstrap'
+  // });
+  // app.import('bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf', {
+  //   destDir: 'fonts/bootstrap'
+  // });
+  // app.import('bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff', {
+  //   destDir: 'fonts/bootstrap'
+  // });
+  // app.import('bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff2', {
+  //   destDir: 'fonts/bootstrap'
+  // });
+
+  /*Font Awesome*/
+  app.import('bower_components/font-awesome/css/font-awesome.css');
+  app.import('bower_components/font-awesome/fonts/fontawesome-webfont.eot', {
+    destDir: 'fonts'
   });
-  app.import('bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.svg', {
-    destDir: 'fonts/bootstrap'
+  app.import('bower_components/font-awesome/fonts/fontawesome-webfont.svg', {
+    destDir: 'fonts'
   });
-  app.import('bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf', {
-    destDir: 'fonts/bootstrap'
+  app.import('bower_components/font-awesome/fonts/fontawesome-webfont.ttf', {
+    destDir: 'fonts'
   });
-  app.import('bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff', {
-    destDir: 'fonts/bootstrap'
+  app.import('bower_components/font-awesome/fonts/fontawesome-webfont.woff', {
+    destDir: 'fonts'
   });
-  app.import('bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff2', {
-    destDir: 'fonts/bootstrap'
+  app.import('bower_components/font-awesome/fonts/fontawesome-webfont.woff2', {
+    destDir: 'fonts'
   });
+  app.import('bower_components/font-awesome/fonts/FontAwesome.otf', {
+    destDir: 'fonts'
+  });
+
 
   /*Styles*/
 
