@@ -1,0 +1,36 @@
+<ul class="pagination">
+  {{#if canStepBackward}}
+  <li>
+    <a href="#" {{action "stepBackward"}} aria-label="Previous">
+      <span aria-hidden="true">&laquo;</span>
+    </a>
+  </li>
+  {{/if}}
+
+  {{#each links as |link|}}
+    {{#if (eq currentPage link)}}
+      <li><a href="#" class="active">{{link}}</a></li>
+    {{else}}
+      <li><a href="#"{{action "goToPage" link}}>{{link}}</a></li>
+    {{/if}}
+  {{/each}}
+
+  {{#if canStepForward}}
+  <li>
+    <a href="#" {{action "stepForward"}} aria-label="Next">
+      <span aria-hidden="true">&raquo;</span>
+    </a>
+  </li>
+  {{/if}}
+</ul>
+
+<select onchange= {{action 'changePageSize' value="target.value"}}>
+  {{#each pageSizes as |pageSize|}}
+    <option value="{{pageSize.value}}">{{pageSize.label}}</option>
+  {{/each}}
+</select>
+
+{{!totalRecordsShown}}
+
+
+{{yield}}

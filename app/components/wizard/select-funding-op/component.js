@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   //original results
   originalList: [],
   selectedDirectorates: [],
+  modList: [],
 
   //sorting
   sortAscending: true,
@@ -20,6 +21,7 @@ export default Ember.Component.extend({
 
   willInsertElement: function() {
     this.set('originalList', this.get('fundingOps'));
+    this.set('modList', this.get('fundingOps').slice(0));
     this.set('selectedDirectorates', this.get('directorates').slice(0));
     let wizard = this.get('wizard');
     let currentFundingOp = wizard.get('fundingOp');
@@ -38,7 +40,7 @@ export default Ember.Component.extend({
     var regexTitle = new RegExp(this.escapeRegExp(titleFilter), 'i');
     var regexId = new RegExp(this.escapeRegExp(idFilter), 'i');
 
-    this.visibleFundingOps.forEach(function(m) {
+    this.modList.forEach(function(m) {
       let add = true;
 
       if (titleFilter !== "" && !regexTitle.test(m.get('title'))) {
@@ -60,15 +62,35 @@ export default Ember.Component.extend({
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
   },
 
-  liveFilter: function() {
+  liveFilter: Ember.computed('titleFilter', 'idFilter', 'modList.isLoaded', 'modList.[]', /* 'selectedDirectorates.[]',*/ function() {
+    // debugger;
+
+    // see what's checked
+    //then sort OR then filter
+
+    // this.checkData();
+
     var titleFilter = this.get('titleFilter').trim();
     var idFilter = this.get('idFilter').trim();
-    this.checkData();
-    this.set('visibleFundingOps', (titleFilter === "" && idFilter === "") ? this.visibleFundingOps : this.getFilteredModels(titleFilter, idFilter));
-  }.observes('titleFilter', 'idFilter', 'originalList.isLoaded', 'selectedDirectorates.[]'),
+    if (titleFilter === "" && idFilter === "") {
+      return this.modList;
+    } else {
+      this.resetCurrentPage();
+      return this.getFilteredModels(titleFilter, idFilter);
+    }
+  }),
 
+  recordsShown: Ember.computed('liveFilter', 'startRecord', 'endRecord', function() {
+      return this.get('liveFilter').slice(this.get('startRecord'), this.get('endRecord'));
+  }),
 
+  liveFilterLength: Ember.computed('liveFilter', function() {
+    return this.get('liveFilter').length;
+  }),
+
+  // sortData: Ember.computed('sortProperty', function() {
   sortData: function() {
+    debugger;
     if (this.sortProperty === null) {
       Ember.Logger.warn(this.TAG, "sort property set to null");
       this.setProperties({
@@ -77,8 +99,7 @@ export default Ember.Component.extend({
       });
       return;
     }
-
-    var sortedArr = this.visibleFundingOps.sortBy(this.sortProperty);
+    var sortedArr = this.modList.sortBy(this.sortProperty);
 
     if (this.prevSortProp === this.sortProperty) {
       var isAscending = this.sortAscending;
@@ -90,12 +111,12 @@ export default Ember.Component.extend({
       this.set('sortAscending', true);
       this.set('prevSortProp', this.sortProperty);
     }
-    this.set('visibleFundingOps', sortedArr);
-  }.observes('sortProperty'),
+    this.set('modList', sortedArr);
+  }/*)*/.observes('sortProperty'),
 
   checkData: function() {
     if (this.selectedDirectorates.length === this.get('directorates').length) {
-      this.set('visibleFundingOps', this.originalList);
+      this.set('modList', this.originalList);
     } else {
       let selectedDirectorates = this.selectedDirectorates;
       var output = [];
@@ -111,10 +132,42 @@ export default Ember.Component.extend({
           }
         }
       });
-      this.set('visibleFundingOps', output);
+      this.set('modList', output);
     }
+    this.resetCurrentPage();
+  }.observes('selectedDirectorates.[]'),
+
+  //pagination
+  currentPage: 1,
+  currentPageSize: {
+    value: 10,
+    label: "show 10"
+  },
+  pageSizes: [
+    {value: 10, label: "show 10"},
+    {value: 50, label: "show 50"},
+    {value: 100, label: "show 100"},
+    {value: 262144, label: "show all"}
+  ],
+  totalPages: 1,
+
+  resetCurrentPage: function() {
+    this.set('currentPage', 1);
   },
 
+  startRecord: Ember.computed('endRecord', function() {
+    let start = this.get('endRecord') - this.currentPageSize.value;
+    return start;
+  }),
+
+  endRecord: Ember.computed('currentPage', 'currentPageSize.value', function() {
+    let end = this.currentPage * this.currentPageSize.value;
+    return end;
+  }),
+
+  totalPages: Ember.computed('currentPageSize.value', 'liveFilter', function() {
+    return Math.ceil(this.get('liveFilter').length / this.currentPageSize.value);
+  }),
 
   actions: {
     next: function() {
@@ -147,6 +200,9 @@ export default Ember.Component.extend({
     },
     uncheckAll: function() {
       this.set('selectedDirectorates', []);
+    },
+    changePageSize: function(pageSize) {
+      debugger;
     }
   }
 });

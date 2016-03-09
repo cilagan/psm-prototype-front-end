@@ -49,7 +49,7 @@
             </div>
           </td>
         </tr>
-        {{#each visibleFundingOps as |fundingOp|}}
+        {{#each recordsShown as |fundingOp|}}
           <tr>
             <td>
               {{radio-button groupValue=fundingOpChoice value=fundingOp}}
@@ -60,6 +60,7 @@
         {{/each}}
       </tbody>
     </table>
+    {{pagination-control currentPage=currentPage totalPages=totalPages totalRecordsShown=liveFilterLength pageSizes=pageSizes}}
   </p>
 
   <button class="btn btn-primary" {{action 'next'}}>Next</button>
