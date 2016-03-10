@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  proposals: Ember.computed.alias('model'),
 
   actions: {
     softDelete(proposal) {

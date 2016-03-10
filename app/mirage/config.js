@@ -6,69 +6,77 @@ export default function() {
     Note: these only affect routes defined *after* them!
   */
   // this.urlPrefix = '';    // make this `http://localhost:8080`, for example, if your API is on a different server
-  this.namespace = 'propmgt';    // make this `api`, for example, if your API is namespaced
+  // this.namespace = 'propmgt';    // make this `api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
-  this.get('/proposals', function(db) {
+  this.get('docService/proposals', function(db) {
     return {
       proposals: db.proposals
     };
   });
 
   // this.get('/proposals/:proposal_id', function(db, request) {
-  this.get('/proposal/:proposal_id/metadata', function(db, request) {
+  this.get('docService/proposal/:proposal_id/metadata', function(db, request) {
     let proposalId = +request.params.proposal_id;
     return {
       proposal: db.proposals.find(proposalId)
     };
   });
 
-  this.del('delete/proposal/:proposal_id');
+  this.del('docService/delete/proposal/:proposal_id');
 
   /*Project Description*/
-  this.get('/proposal/:proposal_id/projdesc/metadata', function(db, request) {
+  this.get('docService/proposal/:proposal_id/projdesc/metadata', function(db, request) {
     let proposal_Id = +request.params.proposal_id;
     return {
       'project-description': db.projectdescriptions.where({tempPropId: proposal_Id})
     };
   });
 
+  /*Data Management Plan*/
+  this.get('docService/proposal/:proposal_id/dmp/metadata', function(db, request) {
+    let proposal_Id = +request.params.proposal_id;
+    return {
+      'data-management-plan': db.dmps.where({tempPropId: proposal_Id})
+    };
+  });
+
 
   /*Cover Sheet*/
 
-  this.get('/proposal/:proposal_id/cover-sheet', function(db, request) {
+  this.get('docService/proposal/:proposal_id/cover-sheet', function(db, request) {
     let proposal_Id = +request.params.proposal_id;
     return {
       'cover-sheet': db.coversheets.where({tempPropId: proposal_Id})
     };
   });
 
-  this.post('/proposal/:proposal_id/cover-sheet', 'cover-sheet');
+  this.post('docService/proposal/:proposal_id/cover-sheet', 'cover-sheet');
 
-  this.del('/proposal/:proposal_id/cover-sheet', 'cover-sheet');
+  this.del('docService/proposal/:proposal_id/cover-sheet', 'cover-sheet');
 
 
   /* WIZARD */
 
-  this.get('/fundingops', function(db) {
+  this.get('propmgt/fundingops', function(db) {
     return {
       'wizard/funding-opportunity': db.fundingopportunities
     };
   });
 
-  this.get('/directorates', function(db) {
+  this.get('propmgt/directorates', function(db) {
     return {
       'wizard/directorate': db.directorates
     };
   });
 
-  this.get('/divisions', function(db) {
+  this.get('propmgt/divisions', function(db) {
       return {
         'wizard/division' : db.divisions
       };
   });
 
-  this.get('/programs', function(db) {
+  this.get('propmgt/programs', function(db) {
       return {
         'wizard/program' : db.programs
       };
@@ -76,7 +84,7 @@ export default function() {
 
 //retrieve division and associated program
 //TODO need to pull more than one program record, query based on div id
-this.get('/division/:division_id', function(db, request) {
+this.get('propmgt/division/:division_id', function(db, request) {
   var division_Id = +request.params.division_id;
   return {
     'wizard/division': db.divisions.find(division_Id),
@@ -84,13 +92,7 @@ this.get('/division/:division_id', function(db, request) {
   };
 });
 
-this.get('/programs', function(db) {
-    return {
-      'wizard/program' : db.programs
-    };
-});
-
-this.get('/programs/:program_id', function(db, request) {
+this.get('propmgt/programs/:program_id', function(db, request) {
     var program_Id = request.params.program_id;
     return {
       'wizard/program' : db.programs.find(program_Id)

@@ -14,9 +14,9 @@
       </tr>
     </thead>
     <tbody>
-      {{#each model as |proposal|}}
+      {{#each proposals as |proposal|}}
       <tr>
-      <td>{{#link-to "proposal" proposal}}{{proposal.tempPropId}}{{/link-to}}</td>
+      <td>{{#link-to "proposal" proposal.tempPropId}}{{proposal.tempPropId}}{{/link-to}}</td>
       <td>{{proposal.proposalTitle}}</td>
       <td><a href="#" {{action "delete" proposal}}>Delete</a></td>
       </tr>

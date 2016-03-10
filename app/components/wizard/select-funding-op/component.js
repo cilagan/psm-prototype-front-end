@@ -63,7 +63,6 @@ export default Ember.Component.extend({
   },
 
   liveFilter: Ember.computed('titleFilter', 'idFilter', 'modList.isLoaded', 'modList.[]', /* 'selectedDirectorates.[]',*/ function() {
-    // debugger;
 
     // see what's checked
     //then sort OR then filter
@@ -90,7 +89,6 @@ export default Ember.Component.extend({
 
   // sortData: Ember.computed('sortProperty', function() {
   sortData: function() {
-    debugger;
     if (this.sortProperty === null) {
       Ember.Logger.warn(this.TAG, "sort property set to null");
       this.setProperties({

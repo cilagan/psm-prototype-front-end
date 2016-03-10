@@ -14,7 +14,7 @@ export default Ember.Component.extend({
 
   links: Ember.computed('this.currentPage', 'this.totalPages', function() {
     let totalPages = this.totalPages;
-    if (totalPages <= 1) { return []}
+    if (totalPages <= 1) { return [];}
     let currentPage = this.currentPage;
     let spread = this.maxLinks-1;
     let halfDistance = spread/2;
@@ -54,7 +54,7 @@ export default Ember.Component.extend({
       this.set('currentPage', 1);
     },
     lastPage: function() {
-      this.set('currentPage', 'totalPages')
+      this.set('currentPage', 'totalPages');
     }
   }
 

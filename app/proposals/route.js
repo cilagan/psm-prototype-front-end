@@ -2,6 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function() {
-    return this.store.findAll('proposal');
+    return $.getJSON('/docService/proposals').then(function(json){
+      return json.proposals;
+    /*}, function() {*/ //TODO if the response is not JSON
+
+    });
+    // return this.store.findAll('proposal');
   }
 });

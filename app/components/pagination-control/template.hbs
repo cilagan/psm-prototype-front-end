@@ -24,11 +24,11 @@
   {{/if}}
 </ul>
 
-<select onchange= {{action 'changePageSize' value="target.value"}}>
-  {{#each pageSizes as |pageSize|}}
-    <option value="{{pageSize.value}}">{{pageSize.label}}</option>
-  {{/each}}
-</select>
+<!-- <select onchange= {{action 'changePageSize' value="target.value"}}> -->
+  {{!#each pageSizes as |pageSize|}}
+    <!-- <option value="{{pageSize.value}}">{{pageSize.label}}</option> -->
+  {{!/each}}
+<!-- </select> -->
 
 {{!totalRecordsShown}}
 
