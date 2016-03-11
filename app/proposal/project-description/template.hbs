@@ -1,6 +1,10 @@
-<h1 align="center">PROJECTION DESCRIPTION HANDLEBARS TEMPLATE</h1>
+<h1 align="left">Project Description</h1>
 
-<dl>
+{{screen-messages messages=messages}}
+
+{{single-file-upload addMessage=(action 'addMessage')}}
+
+<!-- <dl>
 
   <dt>Upload Date</dt>
   <dd>{{model.uploadDate}}</dd>
@@ -13,4 +17,4 @@
 
   <p><a href="{{model.fileURL}}" target="_blank">View File</a></p>
 
-</dl>
+</dl> -->

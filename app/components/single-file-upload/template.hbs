@@ -1,0 +1,22 @@
+<p>
+  File Upload
+</p>
+
+<p>Browse for a file to upload {{input type="file" change=(action 'addFileToUpload') }} </p>
+
+{{#if fileList}}
+  <table class="table">
+    {{#each fileList as |file|}}
+      <tr>
+        <td>{{file.name}}</td>
+        <td><a href="#" {{action "removeFileUpload" file}}>Delete</a></td>
+      </tr>
+    {{/each}}
+  </table>
+
+{{else}}
+  <p>Choose a File</p>
+{{/if}}
+
+
+{{yield}}
