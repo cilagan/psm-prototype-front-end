@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  size: 1, //default size of page list
   maxLinks: 5,
 
   canStepForward: Ember.computed('this.currentPage', 'this.totalPages', function() {
