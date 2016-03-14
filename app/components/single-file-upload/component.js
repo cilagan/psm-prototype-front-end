@@ -34,7 +34,7 @@ export default Ember.Component.extend({
 
       fileList.forEach(function(m) {
         data.append(m.name, m);
-      })
+      });
 
       this.sendAction('uploadFiles', data);
     }
