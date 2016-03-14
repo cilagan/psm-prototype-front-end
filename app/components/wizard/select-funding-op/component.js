@@ -147,7 +147,7 @@ export default Ember.Component.extend({
     {value: 100, label: "show 100"},
     {value: 262144, label: "show all"}
   ],
-  totalPages: 1,
+  // totalPages: 1,
 
   resetCurrentPage: function() {
     this.set('currentPage', 1);
@@ -198,9 +198,9 @@ export default Ember.Component.extend({
     },
     uncheckAll: function() {
       this.set('selectedDirectorates', []);
-    },
+    }/*,
     changePageSize: function(pageSize) {
       debugger;
-    }
+    }*/
   }
 });
