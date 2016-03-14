@@ -7,7 +7,6 @@ export default Ember.Component.extend({
   }),
 
   warningMessages: Ember.computed('this.messages.[]', function() {
-    debugger;
     return ( null !== this.get('messages') ) ? this.get('messages').filterBy('status', "warning") : [];
   }),
 

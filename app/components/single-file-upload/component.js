@@ -14,6 +14,7 @@ export default Ember.Component.extend({
     addFileToUpload: function(e) {
       let fileList = this.get('fileList');
       let file = e.target.files[0];
+      // let fileSize = file.size;
 
       if (fileList.findBy("name", file.name) === undefined) {
         fileList.pushObject(file);
@@ -26,6 +27,16 @@ export default Ember.Component.extend({
     removeFileUpload(file) {
       let fileList = this.get('fileList');
       fileList.removeObject(file);
+    },
+    uploadFiles: function() {
+      let data = new FormData();
+      let fileList = this.get('fileList');
+
+      fileList.forEach(function(m) {
+        data.append(m.name, m);
+      })
+
+      this.sendAction('uploadFiles', data);
     }
   }
 

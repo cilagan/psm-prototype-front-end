@@ -14,9 +14,11 @@
     {{/each}}
   </table>
 
+  <button class="btn btn-primary" {{action 'uploadFiles'}}>Upload</button>
 {{else}}
   <p>Choose a File</p>
 {{/if}}
+
 
 
 {{yield}}
