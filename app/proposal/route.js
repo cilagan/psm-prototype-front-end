@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import $ from 'jQuery';
+import $ from 'jquery';
 
 export default Ember.Route.extend({
   model(params) {
