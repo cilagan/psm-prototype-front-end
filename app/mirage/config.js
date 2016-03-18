@@ -9,6 +9,8 @@ export default function() {
   // this.namespace = 'propmgt';    // make this `api`, for example, if your API is namespaced
   // this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
+
+
   this.get('docService/proposals', function(db) {
     return {
       proposals: db.proposals
@@ -102,7 +104,7 @@ this.get('propmgt/programs/:program_id', function(db, request) {
 
 
 
-
+this.passthrough('http://localhost/docService/proposal/1008698/projdesc');
 
 
 

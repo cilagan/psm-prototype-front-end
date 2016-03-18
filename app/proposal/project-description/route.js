@@ -11,6 +11,8 @@ export default Ember.Route.extend({
     return $.getJSON('/docService/proposal/'+proposalId+'/projdesc/metadata').then(function(json) {
       return json["project-description"][0];
     });
+
+
   }
 
 });
