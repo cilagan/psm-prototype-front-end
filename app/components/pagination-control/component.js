@@ -36,10 +36,18 @@ export default Ember.Component.extend({
     return links;
   }),
 
+  pageSizes: [
+    {value: 10, label: "show 10"},
+    {value: 50, label: "show 50"},
+    {value: 100, label: "show 100"},
+    {value: 262144, label: "show all"}
+  ],
+
   actions: {
-    // changePageSize: function(pageSize) {
-    //   this.sendAction('changePageSize', pageSize);
-    // },
+    changePageSize: function(pageSize) {
+      pageSize = parseInt(pageSize);
+      this.sendAction('changePageSize', pageSize);
+    },
     stepForward: function() {
       this.incrementProperty('currentPage');
     },

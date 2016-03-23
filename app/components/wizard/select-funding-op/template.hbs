@@ -60,8 +60,7 @@
         {{/each}}
       </tbody>
     </table>
-    {{pagination-control currentPage=currentPage totalPages=totalPages totalRecordsShown=liveFilterLength}}
-    {{!pagination-control currentPage=currentPage totalPages=totalPages totalRecordsShown=liveFilterLength pageSizes=pageSizes}}
+    {{pagination-control currentPage=currentPage totalPages=totalPages totalRecordsShown=liveFilterLength changePageSize=(action 'changePageSize')}}
   </p>
 
   <button class="btn btn-primary" {{action 'next'}}>Next</button>

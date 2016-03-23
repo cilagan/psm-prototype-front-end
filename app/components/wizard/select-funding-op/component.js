@@ -137,16 +137,13 @@ export default Ember.Component.extend({
 
   //pagination
   currentPage: 1,
-  currentPageSize: {
-    value: 10,
-    label: "show 10"
-  },
-  pageSizes: [
-    {value: 10, label: "show 10"},
-    {value: 50, label: "show 50"},
-    {value: 100, label: "show 100"},
-    {value: 262144, label: "show all"}
-  ],
+  currentPageSize: 10,
+  // pageSizes: [
+  //   {value: 10, label: "show 10"},
+  //   {value: 50, label: "show 50"},
+  //   {value: 100, label: "show 100"},
+  //   {value: 262144, label: "show all"}
+  // ],
   // totalPages: 1,
 
   resetCurrentPage: function() {
@@ -154,17 +151,17 @@ export default Ember.Component.extend({
   },
 
   startRecord: Ember.computed('endRecord', function() {
-    let start = this.get('endRecord') - this.currentPageSize.value;
+    let start = this.get('endRecord') - this.currentPageSize;
     return start;
   }),
 
-  endRecord: Ember.computed('currentPage', 'currentPageSize.value', function() {
-    let end = this.currentPage * this.currentPageSize.value;
+  endRecord: Ember.computed('currentPage', 'currentPageSize', function() {
+    let end = this.currentPage * this.currentPageSize;
     return end;
   }),
 
-  totalPages: Ember.computed('currentPageSize.value', 'liveFilter', function() {
-    return Math.ceil(this.get('liveFilter').length / this.currentPageSize.value);
+  totalPages: Ember.computed('currentPageSize', 'liveFilter', function() {
+    return Math.ceil(this.get('liveFilter').length / this.currentPageSize);
   }),
 
   actions: {
@@ -198,9 +195,10 @@ export default Ember.Component.extend({
     },
     uncheckAll: function() {
       this.set('selectedDirectorates', []);
-    }/*,
+    },
     changePageSize: function(pageSize) {
-      debugger;
-    }*/
+      this.set('currentPageSize', pageSize);
+      this.resetCurrentPage();
+    }
   }
 });
