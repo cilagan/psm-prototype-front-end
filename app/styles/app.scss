@@ -2,8 +2,12 @@
  *all additional SASS files must be imported into app.scss and all futher SASS rules must
  *follow the imports */
 
-// @import "_customVariables";
+@import "_customVariables";
+
+@import "_rgov_general";
 
 @import "bootstrap";
 
-// @import "rgov_buttons";
+@import "_rgov_alerts";
+@import "_rgov_header";
+@import "_rgov_footer";

@@ -1,0 +1,100 @@
+/*Advisory*/
+
+/* Alerts */
+
+.alert {
+  padding: 10px !important;
+  font-size: 14px !important;
+  p {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .fa-stack {
+    width: auto;
+    height: auto;
+    line-height: normal;
+  }
+  &.alert-info {
+    background-color: #eefbff !important;
+    border-color: #008ba9 !important;
+    color: #007a95 !important;
+    &:before {
+      font-family: FontAwesome;
+      content: "\f05a";
+      display: block;
+      float: left;
+      font-size: 16px !important;
+      height: 30px;
+      margin-right: 6px;
+    }
+  }
+}
+
+.alert-info a {
+  color: #007a95 !important;
+}
+
+.alert {
+  &.alert-success {
+    background-color: #eefbff !important;
+    border-color: #008ba9 !important;
+    color: #007a95 !important;
+    &:before {
+      font-family: FontAwesome;
+      content: "\f05a";
+      display: block;
+      float: left;
+      font-size: 16px !important;
+      height: 30px;
+      margin-right: 6px;
+    }
+  }
+  &.alert-warning {
+    background-color: #fff9e3;
+    border-color: #8e5300 !important;
+    color: #8e5300 !important;
+    &:before {
+      font-family: FontAwesome;
+      content: "\f071";
+      display: block;
+      float: left;
+      font-size: 16px !important;
+      height: 30px;
+      margin-right: 6px;
+    }
+  }
+  &.alert-danger {
+    background-color: #fff0f0;
+    border-color: #e74c3c;
+    color: #b12a1f;
+    &:before {
+      font-family: FontAwesome;
+      content: "\f06a";
+      display: block;
+      float: left;
+      font-size: 16px !important;
+      height: 30px;
+      margin-right: 6px;
+    }
+  }
+}
+
+.alert-dismissable .close, .alert-dismissible .close {
+  right: 0px !important;
+}
+
+#anchor {
+  color: #333 !important;
+  margin-bottom: 10px;
+  a {
+    color: #017d96;
+    font-weight: normal !important;
+    text-decoration: none;
+    &:hover {
+      color: #c64b00;
+    }
+  }
+  .muted-text {
+    color: #333;
+  }
+}

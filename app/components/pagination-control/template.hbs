@@ -9,7 +9,7 @@
 
   {{#each links as |link|}}
     {{#if (eq currentPage link)}}
-      <li><a href="#" class="active">{{link}}</a></li>
+      <li class="active"><a href="#" {{action "goToPage" link}}>{{link}}</a></li>
     {{else}}
       <li><a href="#"{{action "goToPage" link}}>{{link}}</a></li>
     {{/if}}
