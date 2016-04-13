@@ -1,0 +1,21 @@
+button {
+	&:hover {
+		text-decoration: none !important;
+	}
+}
+
+.btn-info {
+	font-family: 'Georgia', serif;
+	font-style: italic;
+	font-size: 16px;
+}
+.btn {
+	padding: 7px 36px !important;
+	margin: 6px 0 !important;
+	display: inline-block;
+}
+.btn-primary {
+	padding: 7px 36px !important;
+	margin: 6px 0 !important;
+	display: inline-block;
+}

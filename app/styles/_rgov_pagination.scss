@@ -1,0 +1,39 @@
+.pagination {
+	.btn {
+		padding: 8px !important;
+	}
+}
+
+div.pagination {
+	display: block !important;
+	padding: 4px 0 0 0;
+	.dropdown {
+		display: inline;
+	}
+	nav {
+		display: inline;
+	}
+	p {
+		display: inline;
+	}
+	div.btn-group {
+		margin: 0px 6px 0 0;
+	}
+	div.dropdown {
+		margin: 0px 10px 0 0;
+	}
+}
+
+ul.pagination {
+	margin: 0;
+	li.first {
+		a {
+			border-left: 1px solid #ccc !important;
+		}
+	}
+	li {
+		a {
+			border: 0 !important;
+		}
+	}
+}

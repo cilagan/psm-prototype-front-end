@@ -8,6 +8,14 @@
 
 @import "bootstrap";
 
+@import "_rgov_type";
+@import "_rgov_tables";
+@import "_rgov_pagination";
+@import "_rgov_buttons";
+
+@import "_rgov_navs";
+@import "_rgov_navbar";
+
 @import "_rgov_alerts";
 @import "_rgov_header";
 @import "_rgov_footer";
