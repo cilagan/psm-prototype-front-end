@@ -12,6 +12,12 @@ table, p, div {
   color: #000;
 }
 
+a {
+	&:hover {
+		text-decoration: none !important;
+	}
+}
+
 /* General IDs / Classes -------------------------------------- */
 
 .datepicker {
@@ -173,4 +179,19 @@ a.fontSizeSelected {
       width: auto;
     }
   }
+}
+
+/* Icon color styles -------------------------------------- */
+
+.fa-file-excel-o {
+	color: #27ae60;
+}
+.fa-file-pdf-o {
+	color: #c0392b;
+}
+.fa-star {
+	color: #f39c12;
+}
+.fa-flag {
+	color: #c0392b;
 }

@@ -1,0 +1,100 @@
+
+<!-- TODO: IF in Dev Enviroment -->
+<div class="row">
+		<div class="col-sm-12">
+			<div id="header" class="theme-header">
+				<div id="masthead">
+					<a href="#" class="logo"></a>
+					<div id="globalNavWelcomeContainer">
+						<div id="globalNav">
+							<ul>
+								<li id="welcome">Welcome&nbsp; FirstName LastName</li>
+								<li><a href="">Logout (Home)</a></li>
+								<li><a href="#">My Profile</a></li>
+
+								<li><a href="#">Contact</a></li>
+								<li><a href="#">Help</a></li>
+
+								<li><a href="#">About</a></li>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div id="primary_nav_wrap">
+				<ul>
+					<li><a href="#">My Desktop</a></li>
+
+
+					<li><a href="#">NSF Staff Services</a>
+						<ul>
+							<li><a href="#">ACM$ (Award Cash Management $ervice)</a></li>
+							<li><a href="#">RSS Feeds</a></li>
+							<li><a href="#">Find Reviewers</a></li>
+							<li><a href="#">Submit Images/Videos</a></li>
+							<li><a href="#">NSB Administration</a></li>
+							<li><a href="#">What We Do</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Research.gov Labs</a>
+						<ul>
+							<li><a href="#">About Labs</a></li>
+							<li><a href="#">Enterprise Reporting</a></li>
+							<li><a href="#">Clustering Tool</a></li>
+							<li><a href="#">Conflict Screening</a></li>
+							<li><a href="#">Proposal Compliance Review</a></li>
+							<li><a href="#">Document Search</a></li>
+						</ul>
+					</li>
+					<li><a href="#">NSF Services</a>
+						<ul>
+							<li><a href="#">Inside FastLane</a></li>
+							<li><a href="#">PIMS</a></li>
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+<!-- TODO: IF in Dev Enviroment -->
+
+<!-- TODO: IF in an upper Enviroment -->
+	<!-- start Header -->
+	<!-- <div class="row">
+		<div class="col-sm-12">
+			<div id="header" class="theme-header"></div>
+		</div>
+	</div> -->
+	<!-- end Header -->
+	<!-- start Navigation -->
+	<!-- <div class="row">
+		<div class="col-sm-12">
+			<div id="primary_nav_wrap"></div>
+		</div>
+	</div> -->
+	<!-- end Navigation -->
+
+	<!-- <script type="text/javascript">
+		jRgovCORS.getResource('${sessionScope['session.NREnvUrl']}<nrtxt:message code="head.foot.suffix"/>', {requestType:"getProcessedContent", nodePath:"header", userGroup:"nsf_id"}, "header_${sessionScope['session.RgovGroup']}", "header");
+		jRgovCORS.getResource('${sessionScope['session.NREnvUrl']}<nrtxt:message code="head.foot.suffix"/>', {requestType:"getProcessedContent", nodePath:"navigation", userGroup:"nsf_id", userId:"${sessionScope['session.UserId']}"}, "navigation_${sessionScope['session.RgovGroup']}_${sessionScope['session.UserId']}", "primary_nav_wrap");
+	 </script> -->
+<!-- TODO: IF in an upper Enviroment -->
+
+<!--start Advisory/RGOV Alerts -->
+<div class="row">
+	<div class="col-sm-12">
+		<div id="advice"></div>
+	</div>
+</div>
+<!--end Advisory -->
+
+
+
+<!-- {{yield}} -->

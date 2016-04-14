@@ -1,0 +1,131 @@
+
+<!-- TODO: IF in Dev Enviroment -->
+	<div id="footer">
+		<div class="content">
+			<div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo research">Research.gov</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="logo nsf">National Science Foundation</div>
+					</div>
+				</div>
+				<div class="row collinks">
+					<div class="col-sm-2">
+						<h3>About Services</h3>
+						<ul>
+							<li><a href="#">Application Submission</a></li>
+							<li><a href="#">ACM$ (Award Cash Management Service)</a></li>
+							<li><a href="#">Proposal Status</a></li>
+							<li><a href="#">Project Reports</a></li>
+							<li><a href="#">User Management</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-2">
+						<h3>NSF Award Highlights</h3>
+						<ul>
+							<li><a href="#">Research Spending &amp; Results</a></li>
+							<li><a href="#">SEE Innovation</a></li>
+						</ul>
+						<h3>Contact</h3>
+						<ul>
+							<li><a href="#">Contact Help Desk</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-2">
+						<h3>News &amp; Discoveries</h3>
+						<ul>
+							<li><a href="#">News</a></li>
+							<li><a href="#">Discoveries</a></li>
+							<li><a href="#">Multimedia Gallery</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-4">
+						<h3>Funding &amp; Awards</h3>
+						<ul>
+							<li><a href="#">Recently Announced Funding Opportunities</a></li>
+							<li><a href="#">Upcoming Funding Opportunity Due Dates</a></li>
+							<li><a href="#">A-Z Index of Funding Opportunities</a></li>
+							<li><a href="#">Find Funding</a></li>
+							<li><a href="#">Award Search</a></li>
+							<li><a href="#">Grant Proposal Guide (GPG)</a></li>
+							<li><a href="#">Proposal and Award Policies Procedures Guide (PAPP)</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-2">
+						<h3>Publications &amp; About NSF</h3>
+						<ul>
+							<li><a href="#">Publications</a></li>
+							<li><a href="#">About the National Science Foundation</a></li>
+							<li><a href="#">Careers</a></li>
+							<li><a href="#">Staff Directory</a></li>
+						</ul>
+					</div>
+				</div>
+		<!-- /row -->
+				<div class="row footerbuttons">
+					<div class="col-sm-4"><a href="#" class="primarybtn">Feedback &#9656;</a></div>
+					<div class="col-sm-8">
+						<ul class="socialicons">
+							<li><a href="#" class="facebook">Facebook</a></li>
+							<li><a href="#" class="twitter">Twitter</a></li>
+							<li><a href="#" class="linkedin">LinkedIn</a></li>
+							<li><a href="#" class="youtube">YouTube</a></li>
+						</ul>
+						<a href="#" class="seeall">See all NSF social media &#9656;</a></div>
+					</div>
+		<!-- /row -->
+					<div class="row anchoredfooter">
+						<div class="col-sm-12">
+						<ul>
+							<li><a href="#">Website Policies</a></li>
+							<li><a href="#">Budget and Performance</a></li>
+							<li><a href="#">Inspector General</a></li>
+							<li><a href="#">Privacy</a></li>
+							<li><a href="#">FOIA</a></li>
+							<li><a href="#">No FEAR Act</a></li>
+							<li><a href="#">USA.gov</a></li>
+							<li><a href="#">Accessibility</a></li>
+							<li><a href="#">Plain Language</a></li>
+							<li><a href="#">Contact</a></li>
+						</ul>
+						<p>The National Science Foundation, 4201 Wilson Boulevard, Arlington, Virginia 22230, USA Tel: (703) 292-5111, FIRS: (800) 877-8339 | TDD: (800) 281-8749</p>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+<!-- TODO: IF in Dev Enviroment -->
+
+<!-- TODO: IF in an upper Enviroment -->
+	<!-- <div id="footer"></div>
+
+	<script type="text/javascript">
+	 	jRgovCORS.getResource('${sessionScope['session.NREnvUrl']}<nrtxt:message code="head.foot.suffix"/>', {requestType:"getProcessedContent", nodePath:"footer", userGroup:"nsf_id"}, "footer_${sessionScope['session.RgovGroup']}", "footer");
+	 </script> -->
+
+
+  <!--start Advisory -->
+  <!-- <script type="text/javascript">
+    $(function() {
+      var pageId = (window.advisoryPageId != undefined ? window.advisoryPageId : "");
+      if (pageId != "") {
+        jAdvisoryDisplay.displayAdvisories(jAdvisory.getAdvisories('nr', pageId), "#advice", pageId);
+      }
+
+      if ($("#welcome a").length) {
+        $("#welcome a").append('${sessionScope['
+          session.UserData '].firstName} ${sessionScope['
+          session.UserData '].lastName}');
+      } else {
+        $("#welcome").append('${sessionScope['
+          session.UserData '].firstName} ${sessionScope['
+          session.UserData '].lastName}');
+      }
+    });
+  </script> -->
+  <!--end Advisory -->
+<!-- TODO: IF in an upper Enviroment -->
+
+{{yield}}
