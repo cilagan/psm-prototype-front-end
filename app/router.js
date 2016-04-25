@@ -12,9 +12,10 @@ Router.map(function() {
   this.route('proposal', {path: '/proposal/:proposal_id'}, function() {
     this.route('project-description');
     this.route('cover-sheet');
+    //   this.route('bio-sketch');
+    //   this.route('bio-sketch', {resetNamespace: true});
     this.route('data-management-plan', { path: '/dmp' });
-  //   this.route('bio-sketch');
-  //   this.route('bio-sketch', {resetNamespace: true});
+    this.route('project-summary');
   });
 
   //Creation Wizard
