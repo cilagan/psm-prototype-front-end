@@ -2,12 +2,7 @@
 
 {{screen-messages messages=messages}}
 
-<!-- <textarea name="editor1" id="editor1" rows="10" cols="80"> -->
-  <!-- This is my textarea to be replaced with CKEditor. -->
-<!-- </textarea> -->
+{{project-summary-form model=model addMessage=(action 'addMessage') saveProjSumm=(action 'saveProjSumm')}}
 
-{{project-summary-form}}
-
-{{!textarea value=name name="editor1" cols="80" rows="10"}}
 
 {{outlet}}

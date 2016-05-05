@@ -1,10 +1,28 @@
-<h3>Overview</h3>
-{{textarea name="overview" cols="80" rows="10"}}
+<div class="row">
+  <div class="col-sm-12">
+  <h3>Overview {{popover-icon-tooltip "Overview" "Enter an overview of the project." }} </h3>
+  {{textarea value=model.overView name="overview" cols="80" rows="10"}}
+  </div>
+</div>
 
-<h3>Intellectual Merit</h3>
-{{textarea name="intellectual_merit" cols="80" rows="10"}}
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Intellectual Merit</h3>
+    {{textarea value=model.intulMerit name="intellectualMerit" cols="80" rows="10"}}
+  </div>
+</div>
 
-<h3>Broader Impacts</h3>
-{{textarea name="broader_impacts" cols="80" rows="10"}}
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Broader Impacts</h3>
+    {{textarea value=model.brodrImpt name="broaderImpacts" cols="80" rows="10"}}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <button class="btn btn-primary" {{action 'saveProjSumm' model}}>Save</button>
+  </div>
+</div>
 
 {{yield}}

@@ -56,7 +56,9 @@ module.exports = function(defaults) {
   });
 
 
-  /*Styles*/
+  /*CKEditor*/
+  app.import('vendor/ckeditor_setup.js'); //setup must be imported before ckeditor.js
+  app.import('vendor/ckeditor.js');
 
   //Need bower packages bootstrap-fileinput
 
