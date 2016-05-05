@@ -2,13 +2,19 @@ import Ember from 'ember';
 
 const PopoverIconTooltipComponent = Ember.Component.extend({
 
-  header: Ember.computed('params.[]', function() {
+  tagName: 'a',
+  attributeBindings: ['href', 'title', 'dataToggle:data-toggle', 'dataTrigger:data-trigger', 'dataContent:data-content', 'dataPlacement:data-placement'],
+  href: '#',
+  dataToggle: 'popover',
+  dataTrigger: 'hover',
+
+  title: Ember.computed('params.[]', function() {
     return this.get('params')[0];
   }),
-  content: Ember.computed('params.[]', function() {
+  dataContent: Ember.computed('params.[]', function() {
     return this.get('params')[1];
   }),
-  position: Ember.computed('params.[]', function() {
+  dataPlacement: Ember.computed('params.[]', function() {
     return this.get('params')[2] ? this.get('params')[2] : "right" ;
   }),
 
