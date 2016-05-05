@@ -1,4 +1,8 @@
 import Ember from 'ember';
+import $ from 'jquery';
+
+//FOR-TESTING
+/* globals CKEDITOR */
 
 export default Ember.Component.extend({
 
@@ -58,16 +62,14 @@ export default Ember.Component.extend({
 
 
         let data = {
-           "id":"1234567",
-           "tempPropId":"1059422",
+           "id":model.id,
+           "tempPropId":model.tempPropId,
            "lastUpdttmsp":null,
            "overView": overview,
            "intulMerit": intellectualMerit,
            "brodrImpt": broaderImpacts
         };
 
-
-        debugger;
         this.sendAction('saveProjSumm', data);
       }
 

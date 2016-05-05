@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import $ from 'jquery';
 
 const PopoverIconTooltipComponent = Ember.Component.extend({
 
@@ -29,6 +30,6 @@ const PopoverIconTooltipComponent = Ember.Component.extend({
 
 PopoverIconTooltipComponent.reopenClass({
   positionalParams: 'params'
-})
+});
 
 export default PopoverIconTooltipComponent;

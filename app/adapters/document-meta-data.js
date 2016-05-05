@@ -4,21 +4,22 @@ export default ApplicationAdapter.extend({
 
   namespace: 'docService',
 
-  buildURL: function (modelName, id, snapshot, requestType, query) {
+  buildURL: function (modelName, id, snapshot, requestType/*, query*/) {
     let url = this._super();
 
-    let model = modelName.split('/')[1]; //proposal/cover-sheet
-
-
-    switch (modelName) {
-      case '':
-      // model =
-    }
+    // let model = modelName.split('/')[1]; //proposal/cover-sheet
+    //
+    //
+    // switch (modelName) {
+    //   case '':
+    //   // model =
+    // }
 
 
     switch (requestType) {
       case 'deleteRecord':
         url += '/delete';
+        /* falls through */
       case 'createRecord':
       case 'findRecord':
       case 'updateRecord':
