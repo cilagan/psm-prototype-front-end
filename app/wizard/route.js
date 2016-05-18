@@ -9,8 +9,15 @@ export default Ember.Route.extend({
     let self = this;
     if (null == wizard) { wizard = this.store.createRecord('wizard'); }
 
+    return Ember.RSVP.hash({
+      wizard: wizard,
+      directorates: $.getJSON('propmgt/directorates'),
+      fundingOps: $.getJSON('propmgt/fundingops'),
+      divisions: $.getJSON('propmgt/divisions'),
+      programs: $.getJSON('propmgt/programs')
+    });
 
-    return new Ember.RSVP.Promise(function(resolve, reject){
+    /*return new Ember.RSVP.Promise(function(resolve, reject){
     self.store.findAll('wizard/funding-opportunity').then(function(fundingOps){
       self.store.findAll('wizard/division').then(function(divisions){
         console.log("CALL DIV");
@@ -32,8 +39,8 @@ export default Ember.Route.extend({
         self.store.findAll('wizard/program');
       });
     });
-  });
-    /*return Ember.RSVP.hash({
+  });*/
+  /*  return Ember.RSVP.hash({
       wizard: wizard,
       directorates: this.store.findAll('wizard/directorate'),
       fundingOps: this.store.findAll('wizard/funding-opportunity'),

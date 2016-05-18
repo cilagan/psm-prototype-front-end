@@ -1,8 +1,11 @@
 <h1>Project Summary</h1>
+{{!#if pdfAvailable}}
+  <a class="btn btn-primary {{pdfAvailable}}" role="button" href="http://localhost:80/Section/projsumm/pdf" target="_blank">PDF</a>
+{{!/if}}
 
 {{screen-messages messages=messages}}
 
-{{project-summary-form model=model addMessage=(action 'addMessage') saveProjSumm=(action 'saveProjSumm')}}
+{{project-summary-form model=model addMessage=(action 'addMessage') clearMessages=(action 'clearMessages') saveProjSumm=(action 'saveProjSumm')}}
 
 
 {{outlet}}

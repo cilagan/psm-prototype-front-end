@@ -23,7 +23,11 @@ export default Ember.Component.extend({
   willInsertElement: function() {
     let wizard = this.get('wizard');
     let fundingOp = wizard.get('fundingOp');
-    let divisions = fundingOp.get('divisions');
+    let divisions = this.get('divisions');
+    // let divisions = fundingOp.divisions;
+    // let divisions = fundingOp.get('divisions');
+
+    debugger;
     this.set('allDivs', divisions);
 
     let wizardChosenDivs = wizard.get('chosenDivPrograms');

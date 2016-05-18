@@ -7,31 +7,44 @@ export default Ember.Controller.extend({
     return [];
   }),
 
+  isEmpty(str) {
+    return (!str || 0 === str.length || /^\s*$/.test(str));
+  },
+
+  pdfAvailable: Ember.computed('this.model.overView', 'this.model.intulMerit', 'this.model.brodrImpt', function() {
+      if (this.isEmpty(this.model.overView) || this.isEmpty(this.model.intulMerit) || this.isEmpty(this.model.brodrImpt)) {
+        return 'disabled';
+      }
+    return '';
+  }),
+
   actions: {
     addMessage: function(message) {
       this.get('messages').pushObject(message);
+      //scroll to top
+      $('html,body').animate({scrollTop: 0}, 'slow');
+      // $('html,body').animate({scrollTop: $("#messageAnchor").offset().top}, 'slow');
+
     },
     clearMessages: function() {
-      this.set('messages',[]);
+      this.set('messages', []);
     },
     saveProjSumm: function(data) {
-      debugger;
+      let controller = this;
 
       $.ajax({
         url: '/Section/projsumm',
-          // url: 'http://localhost:80/Section/projsumm',
         type: 'POST',
-        data: data,
-        // data: JSON.stringify(data),
+        data: JSON.stringify(data),
         contentType: "application/json",
-        // contentType: false,
         cache: false,
         processData: false,
         success: function(data, textStatus, jqXHR) {
-          debugger;
           if(typeof data.error === 'undefined') {
-              // Success so call function to process the form
-              //submitForm(event, data);
+            controller.set('model', data);
+            let message = {status:"info", dismissable: true, message: "Changes saved."};
+            controller.send('addMessage', message);
+            // controller.addMessage(message);
           }
           else {
               // Handle errors here

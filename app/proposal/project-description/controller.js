@@ -21,11 +21,12 @@ export default Ember.Controller.extend({
       debugger;
 
       $.ajax({
-        url: '/docService/proposal/'+ this.model.tempPropId +'/projdesc',
+        // url: '/docService/proposal/'+ this.model.tempPropId +'/projdesc',
+        url: 'http://localhost:80/docService/proposal/1008698/projdesc',
         type: 'POST',
         data: data,
         cache: false,
-        dataType: 'json',
+        // dataType: 'json', //if JSON is coming back
         processData: false, // Don't process the files
         contentType: false, // Set content type to false as jQuery will tell the server its a query string request
         success: function(data, textStatus, jqXHR) {

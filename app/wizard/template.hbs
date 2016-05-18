@@ -14,7 +14,7 @@
     {{/if}}
 
     {{#if selectDivisionProgram}}
-      {{wizard/select-division-program wizard=model.wizard previous=(action 'toFundingOp') next=(action 'toTypeFunding')}}
+      {{wizard/select-division-program wizard=model.wizard divisions=model.divisions previous=(action 'toFundingOp') next=(action 'toTypeFunding')}}
     {{/if}}
 
     {{#if selectTypeFunding}}

@@ -24,7 +24,7 @@
   {{/if}}
 </ul>
 
-<select onchange= {{action 'changePageSize' value='target.value'}}> -->
+<select class="test-page-size-select" onchange= {{action 'changePageSize' value='target.value'}}> -->
   {{#each pageSizes as |pageSize|}}
     <option value={{pageSize.value}}>{{pageSize.label}}</option>
   {{/each}}

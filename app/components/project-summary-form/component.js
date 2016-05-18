@@ -23,12 +23,6 @@ export default Ember.Component.extend({
      CKEDITOR.replace( 'intellectualMerit' );
      CKEDITOR.replace( 'broaderImpacts' );
 
-    //  CKEDITOR.on( 'instanceCreated', function ( event, data ) {
-    //    debugger;
-    //   let editor = event.editor,
-    //   element = editor.element;
-    //   editor.name = $(element).attr('name');
-    // } );
   },
 
   isEmpty(str) {
@@ -37,6 +31,8 @@ export default Ember.Component.extend({
 
   actions: {
     saveProjSumm: function(model) {
+
+      this.sendAction('clearMessages');
 
       let overviewEmberId = $('textarea[name="overview"]:eq(0)').attr('id');
       let intellectualMeritEmberId = $('textarea[name="intellectualMerit"]:eq(0)').attr('id');
