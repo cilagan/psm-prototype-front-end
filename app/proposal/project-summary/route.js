@@ -10,6 +10,7 @@ export default Ember.Route.extend({
     //   return json["project-summary"][0];
     // });
 
-    return $.getJSON('/Section/projsumm');
+    // return $.getJSON('/Section/projsumm');
+    return {};
   }
 });

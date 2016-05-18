@@ -61,27 +61,31 @@ export default function() {
   /* WIZARD */
 
   this.get('propmgt/fundingops', function(db) {
-    return {
-      'wizard/funding-opportunity': db.fundingopportunities
-    };
+    return db.fundingopportunities;
+    // return {
+    //   'wizard/funding-opportunity': db.fundingopportunities
+    // };
   });
 
   this.get('propmgt/directorates', function(db) {
-    return {
-      'wizard/directorate': db.directorates
-    };
+    return db.directorates;
+    // return {
+    //   'wizard/directorate': db.directorates
+    // };
   });
 
   this.get('propmgt/divisions', function(db) {
-      return {
-        'wizard/division' : db.divisions
-      };
+    return db.divisions;
+      // return {
+      //   'wizard/division' : db.divisions
+      // };
   });
 
   this.get('propmgt/programs', function(db) {
-      return {
-        'wizard/program' : db.programs
-      };
+    return db.programs;
+      // return {
+      //   'wizard/program' : db.programs
+      // };
   });
 
 //retrieve division and associated program
@@ -104,7 +108,8 @@ this.get('propmgt/programs/:program_id', function(db, request) {
 
 
 
-this.passthrough('http://localhost/docService/proposal/1008698/projdesc');
+// this.passthrough('/docService/proposal/1008698/projdesc');
+this.passthrough('http://localhost:80/docService/proposal/1008698/projdesc');
 
 
 
