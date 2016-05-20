@@ -12,6 +12,14 @@
 		a {
 			color: #fff;
 		}
+
+		th.sortable-header:after {
+			font-family: FontAwesome;
+			content:"\f0dc";
+			color: white;
+			padding-left: 7px;
+		}
+
 	}
 	td {
 		border: 1px solid #ced6da;

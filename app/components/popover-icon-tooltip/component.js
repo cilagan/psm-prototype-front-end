@@ -16,7 +16,8 @@ const PopoverIconTooltipComponent = Ember.Component.extend({
     return this.get('params')[1];
   }),
   dataPlacement: Ember.computed('params.[]', function() {
-    return this.get('params')[2] ? this.get('params')[2] : "right" ;
+    //return this.get('params')[2] ? this.get('params')[2] : "right" ;
+    return this.get('params')[2] || "right" ;
   }),
 
   didInsertElement: function() {

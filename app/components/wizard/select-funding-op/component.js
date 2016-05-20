@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 
   //original results
   originalList: [],
-  selectedDirectorates: [],
+  // selectedDirectorates: [],
   modList: [],
 
   //sorting
@@ -22,7 +22,7 @@ export default Ember.Component.extend({
   willInsertElement: function() {
     this.set('originalList', this.get('fundingOps'));
     this.set('modList', this.get('fundingOps').slice(0));
-    this.set('selectedDirectorates', this.get('directorates').slice(0));
+    // this.set('selectedDirectorates', this.get('directorates').slice(0));
     let wizard = this.get('wizard');
     let currentFundingOp = wizard.get('fundingOp');
     if (currentFundingOp) {
@@ -40,14 +40,15 @@ export default Ember.Component.extend({
     var regexTitle = new RegExp(this.escapeRegExp(titleFilter), 'i');
     var regexId = new RegExp(this.escapeRegExp(idFilter), 'i');
 
+
     this.modList.forEach(function(m) {
       let add = true;
 
-      if (titleFilter !== "" && !regexTitle.test(m.get('title'))) {
+      if (titleFilter !== "" && !regexTitle.test(m.title)) {
         add = false;
       }
 
-      if (idFilter !== "" && !regexId.test(m.get('id'))) {
+      if (idFilter !== "" && !regexId.test(m.id)) {
         add = false;
       }
 
@@ -112,7 +113,7 @@ export default Ember.Component.extend({
     this.set('modList', sortedArr);
   }/*)*/.observes('sortProperty'),
 
-  checkData: function() {
+  /*checkData: function() {
     if (this.selectedDirectorates.length === this.get('directorates').length) {
       this.set('modList', this.originalList);
     } else {
@@ -133,7 +134,7 @@ export default Ember.Component.extend({
       this.set('modList', output);
     }
     this.resetCurrentPage();
-  }.observes('selectedDirectorates.[]'),
+  }.observes('selectedDirectorates.[]'),*/
 
   //pagination
   currentPage: 1,
@@ -190,12 +191,12 @@ export default Ember.Component.extend({
         this.set('sortProperty', property);
       }
     },
-    checkAll: function() {
+    /*checkAll: function() {
       this.set('selectedDirectorates', this.get('directorates').slice(0));
     },
     uncheckAll: function() {
       this.set('selectedDirectorates', []);
-    },
+    },*/
     changePageSize: function(pageSize) {
       this.set('currentPageSize', pageSize);
       this.resetCurrentPage();
