@@ -11,7 +11,7 @@ export default Ember.Route.extend({
 
     return Ember.RSVP.hash({
       wizard: wizard,
-      directorates: $.getJSON('propmgt/directorates'),
+      // directorates: $.getJSON('propmgt/directorates'),
       fundingOps: $.getJSON('propmgt/fundingops'),
       divisions: $.getJSON('propmgt/divisions'),
       programs: $.getJSON('propmgt/programs')
