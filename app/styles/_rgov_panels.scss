@@ -1,0 +1,16 @@
+
+.panel {
+  border-top: 3px solid $panel-border-top-color;
+  padding: $panel-vertical-padding $panel-horizontal-padding;
+  box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.17)
+}
+
+.panel-title {
+  font: 20px ‘Georgia’, serif;
+  color: $panel-title-color;
+  border-bottom: 1px solid $panel-title-bottom-border-color;
+}
+
+.panel-body {
+  padding: $panel-body-padding 0px;
+}
