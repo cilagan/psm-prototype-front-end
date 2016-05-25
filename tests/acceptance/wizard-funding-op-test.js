@@ -119,3 +119,83 @@ test ('cannot move forward without selecting a funding opportunity', function(as
   });
 
 });
+
+test ('search for funding opportunities (by id)', function(assert) {
+    let searchTerm = '16-5';
+
+    fillIn('div#searchbar-div input', searchTerm);
+
+    andThen(function() {
+      let idsFromPage = [];
+      let isValidSearch = true;
+      let pageSize = find('.test-page-size-select').val();
+
+      find('td:nth-child(2)').each(function(){
+          idsFromPage.push($(this).text().trim());
+      });
+
+      if(idsFromPage.length > 0) {
+        $.each(idsFromPage, function(index, value){
+          if(value.trim().indexOf(searchTerm) === -1){
+            isValidSearch = false;
+          }
+        });
+      }
+
+      assert.equal(isValidSearch, true, 'The funding opportunities were successfully filtered and each id contains the search term \"' + searchTerm + '\"');
+    });
+
+});
+
+test ('search for funding opportunities (by title)', function(assert) {
+    let searchTerm = 'Research';
+
+    fillIn('div#searchbar-div input', searchTerm);
+
+    andThen(function() {
+      let titlesFromPage = [];
+      let isValidSearch = true;
+      let pageSize = find('.test-page-size-select').val();
+
+      find('td:nth-child(3)').each(function(){
+          titlesFromPage.push($(this).text().trim());
+      });
+
+      if(titlesFromPage.length > 0) {
+        $.each(titlesFromPage, function(index, value){
+          if(value.trim().indexOf(searchTerm) === -1){
+            isValidSearch = false;
+          }
+        });
+      }
+
+      assert.equal(isValidSearch, true, 'The funding opportunities were successfully filtered and each title contains the search term \"' + searchTerm + '\"');
+    });
+});
+
+test ('search for funding opportunities (by id and title) using invalid search term', function(assert) {
+    let searchTerm = 'FERFRewhtreg';
+
+    fillIn('div#searchbar-div input', searchTerm);
+
+    andThen(function() {
+      let titlesFromPage = [];
+      let idsFromPage = [];
+      let isInvalidSearch = false;
+      let pageSize = find('.test-page-size-select').val();
+
+      find('td:nth-child(2)').each(function(){
+          idsFromPage.push($(this).text().trim());
+      });
+
+      find('td:nth-child(3)').each(function(){
+          titlesFromPage.push($(this).text().trim());
+      });
+
+      if(titlesFromPage.length === 0 && idsFromPage.length === 0) {
+        isInvalidSearch = true;
+      }
+
+      assert.equal(isInvalidSearch, true, 'The invalid search term \"' + searchTerm + '\" returned 0 results, as expected.');
+    });
+  });
