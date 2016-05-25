@@ -3,8 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   //filter terms
-  titleFilter: "",
-  idFilter: "",
+  searchFilter: "",
 
   //original results
   originalList: [],
@@ -30,30 +29,20 @@ export default Ember.Component.extend({
     }
   },
 
-  getFilteredModels: function(titleFilter, idFilter) {
+  getFilteredModels: function(searchFilter) {
     if (this.originalList == null) {
       return [];
     }
-
+    if (searchFilter === "") {
+      return this.modList;
+    }
+    
     var output = [];
-
-    var regexTitle = new RegExp(this.escapeRegExp(titleFilter), 'i');
-    var regexId = new RegExp(this.escapeRegExp(idFilter), 'i');
-
+    var regexSearchTerm = new RegExp(this.escapeRegExp(searchFilter), 'i');
 
     this.modList.forEach(function(m) {
-      let add = true;
-
-      if (titleFilter !== "" && !regexTitle.test(m.title)) {
-        add = false;
-      }
-
-      if (idFilter !== "" && !regexId.test(m.id)) {
-        add = false;
-      }
-
-      if (add) {
-        output.pushObject(m);
+      if (regexSearchTerm.test(m.title) || regexSearchTerm.test(m.id)) {
+          output.pushObject(m);
       }
     });
 
@@ -63,20 +52,19 @@ export default Ember.Component.extend({
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
   },
 
-  liveFilter: Ember.computed('titleFilter', 'idFilter', 'modList.isLoaded', 'modList.[]', /* 'selectedDirectorates.[]',*/ function() {
+  liveFilter: Ember.computed('searchFilter', 'modList.isLoaded', 'modList.[]', /* 'selectedDirectorates.[]',*/ function() {
 
     // see what's checked
     //then sort OR then filter
 
     // this.checkData();
 
-    var titleFilter = this.get('titleFilter').trim();
-    var idFilter = this.get('idFilter').trim();
-    if (titleFilter === "" && idFilter === "") {
+    var searchFilter = this.get('searchFilter').trim();
+    if (searchFilter === "") {
       return this.modList;
     } else {
       this.resetCurrentPage();
-      return this.getFilteredModels(titleFilter, idFilter);
+      return this.getFilteredModels(searchFilter);
     }
   }),
 

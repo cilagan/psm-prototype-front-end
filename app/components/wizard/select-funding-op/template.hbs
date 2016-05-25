@@ -42,6 +42,12 @@
       <h3 class="panel-title">Funding Opportunities</h3>
     </div>
     <div class="panel-body">
+      <div id="searchbar-div" class="input-group searchBar">
+        {{input value=searchFilter placeholder='Filter by id or title'}}
+        <span class=class="input-group-addon">
+          <i class="fa fa-search"></i>
+        </span>
+      </div>
       <table class="table table-striped table-bordered table-hover">
         <thead>
           <tr>
@@ -52,27 +58,6 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-
-
-            <td>
-              <div class="input-group">
-                {{input value=idFilter}}
-                <span class=class="input-group-addon">
-                  <i class="fa fa-search"></i>
-                </span>
-              </div>
-            </td>
-            <td>
-              <div class="input-group">
-                {{input value=titleFilter}}
-                <span class=class="input-group-addon">
-                  <i class="fa fa-search"></i>
-                </span>
-              </div>
-            </td>
-          </tr>
           {{#each recordsShown as |fundingOp|}}
             <tr>
               <td>
