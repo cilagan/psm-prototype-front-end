@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import $ from 'jquery';
+// import $ from 'jquery'; //do not import jQuery to avoid Bootstrap jQuery conflicts
 
 const PopoverIconTooltipComponent = Ember.Component.extend({
 
@@ -13,7 +13,7 @@ const PopoverIconTooltipComponent = Ember.Component.extend({
     return this.get('params')[0];
   }),
   dataContent: Ember.computed('params.[]', function() {
-    return this.get('params')[1];
+    return Ember.String.htmlSafe(this.get('params')[1]);
   }),
   dataPlacement: Ember.computed('params.[]', function() {
     //return this.get('params')[2] ? this.get('params')[2] : "right" ;

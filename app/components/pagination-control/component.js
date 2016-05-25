@@ -2,15 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  maxLinks: 5,
-
-  // canGoToBeg: Ember.computed('this.currentPage', function() {
-  //   // body
-  // }),
-  //
-  // canGoToEnd: Ember.computed('this.currentPage', 'this.totalPages', function() {
-  //   // body
-  // }),
+  maxLinks: 5, //an odd number for symmetry
 
   canStepForward: Ember.computed('this.currentPage', 'this.totalPages', function() {
     return this.currentPage < this.totalPages;
@@ -20,7 +12,7 @@ export default Ember.Component.extend({
   }),
 
   isShowingAll: Ember.computed('this.totalPages', function() {
-    return this.totalPages == 1;
+    return this.totalPages <= 1;
   }),
 
   start: Ember.computed('this.startRecord', function() {
@@ -58,6 +50,7 @@ export default Ember.Component.extend({
 
   pageSizes: [
     {value: 10, label: "show 10"},
+    {value: 25, label: "show 25"},
     {value: 50, label: "show 50"},
     {value: 100, label: "show 100"},
     {value: 262144, label: "show all"}
@@ -81,6 +74,7 @@ export default Ember.Component.extend({
       this.set('currentPage', 1);
     },
     gotToLastPage: function() {
+      debugger;
       this.set('currentPage', 'totalPages');
     }
   }

@@ -13,8 +13,8 @@ export default Ember.Route.extend({
       wizard: wizard,
       // directorates: $.getJSON('propmgt/directorates'),
       fundingOps: $.getJSON('propmgt/fundingops'),
-      divisions: $.getJSON('propmgt/divisions'),
-      programs: $.getJSON('propmgt/programs')
+      // divisions: $.getJSON('propmgt/divisions'),
+      // programs: $.getJSON('propmgt/programs')
     });
 
     /*return new Ember.RSVP.Promise(function(resolve, reject){

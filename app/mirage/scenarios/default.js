@@ -5,8 +5,8 @@ export default function( server ) {
   server.createList('projectdescription', 5);
   server.createList('dmp', 5);
 
-  // server.createList('fundingopportunity', 1000);
-  server.loadFixtures('fundingopportunities');
+  server.createList('fundingopportunity', 1000);
+  // server.loadFixtures('fundingopportunities');
 
   server.loadFixtures('directorates');
 

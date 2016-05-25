@@ -43,7 +43,7 @@
       {{pagination-control currentPage=currentPage totalPages=totalPages totalRecordsShown=liveFilterLength startRecord=startRecord endRecord=endRecord changePageSize=(action 'changePageSize')}}
 
       <div id="searchbar-div" class="input-group searchBar">
-        {{input value=searchFilter placeholder='Filter by id or title'}}
+        {{input value=searchFilter placeholder='Filter by number or title'}}
         <span class=class="input-group-addon">
           <i class="fa fa-search"></i>
         </span>
@@ -53,8 +53,9 @@
         <thead>
           <tr>
             <th>Select</th>
-            <th class="sortable-header" {{action 'sortBy' "id"}}>Solicitation Number</th>
-            <th class="sortable-header" {{action 'sortBy' "title"}}>Program Announcement</th>
+            <th class="sortable-header" {{action 'sortBy' "id"}}>Funding Opportunity Number
+            {{popover-icon-tooltip "Funding Opportunity Number" "The funding opportunity number is found on the program guidlines. A listing of active funding opportunities and associated guidelines may be found <a href=\"http://www.nsf.gov/funding/pgm_list.jsp?org=NSF&ord=date\">here</a>" }}</th>
+            <th class="sortable-header" {{action 'sortBy' "title"}}>Funding Opportunity Title</th>
           </tr>
         </thead>
         <tbody>
@@ -66,6 +67,9 @@
               <td>{{fundingOp.id}}</td>
               <td>{{fundingOp.title}}</td>
             </tr>
+          {{else}}
+            <tr><td class="no-results" colspan="3"><h4>No funding opportunities match the filter criteria</h4></td></tr>
+
           {{/each}}
         </tbody>
       </table>

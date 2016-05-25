@@ -36,7 +36,7 @@ export default Ember.Component.extend({
     if (searchFilter === "") {
       return this.modList;
     }
-    
+
     var output = [];
     var regexSearchTerm = new RegExp(this.escapeRegExp(searchFilter), 'i');
 
@@ -129,6 +129,7 @@ export default Ember.Component.extend({
   currentPageSize: 10,
   // pageSizes: [
   //   {value: 10, label: "show 10"},
+  //   {value: 25, label: "show 25"},
   //   {value: 50, label: "show 50"},
   //   {value: 100, label: "show 100"},
   //   {value: 262144, label: "show all"}

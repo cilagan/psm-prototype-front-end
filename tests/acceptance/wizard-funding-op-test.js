@@ -21,7 +21,7 @@ test('visiting Select Funding Opportunity wizard screen', function(assert) {
 
 test ('check selectable funding opportunities are present and page size changes', function(assert) {
   // let fundingOpSize = 100;
-  let notCountedTRs = 2; //header tr, search tr
+  let notCountedTRs = 1; //header tr
 
   // server.createList('fundingopportunity', fundingOpSize);
   // visit('/create');
@@ -33,6 +33,12 @@ test ('check selectable funding opportunities are present and page size changes'
   andThen(function() {
     assert.equal(find('tr').length, 10 + notCountedTRs, 'Verify by default only 10 funding opportunities are displayed, 10 funding opportunities shown');
     assert.equal( find('span.pagination').eq(0).text().trim(), 'Showing 1 to 10 of ' + find('.totalRecordsShown').eq(0).text(), 'Showing 1 to 10 of total records shown');
+  });
+
+  fillIn('.test-page-size-select', 25);
+  andThen(function() {
+    assert.equal(find('tr').length, 25 + notCountedTRs, '25 funding opportunities shown');
+    assert.equal( find('span.pagination').eq(0).text().trim(), 'Showing 1 to 25 of ' + find('.totalRecordsShown').eq(0).text(), 'Showing 1 to 25 of total records shown');
   });
 
   fillIn('.test-page-size-select', 50);
@@ -69,12 +75,12 @@ test ('sort the funding opportunities', function(assert) {
       let titlesFromDB = json.map(function(j){
           return j.title;
       });
-      assert.deepEqual( titlesFromPage.slice(1, pageSize+1), titlesFromDB.slice(0, pageSize), 'The funding opportunities are sorted correctly.');
+      assert.deepEqual( titlesFromPage.slice(0, pageSize+1), titlesFromDB.slice(0, pageSize), 'The funding opportunities are sorted correctly.');
     });
   });
 
-  click('.sortable-header:contains(\'Solicitation Number\')');
-  click('.sortable-header:contains(\'Solicitation Number\')'); //click twice to reverse the order
+  click('.sortable-header:contains(\'Funding Opportunity Number\')');
+  click('.sortable-header:contains(\'Funding Opportunity Number\')'); //click twice to reverse the order
 
   andThen(function() {
     let idsFromPage = [];
@@ -86,11 +92,11 @@ test ('sort the funding opportunities', function(assert) {
       let idsFromDB = json.map(function(j){
           return j.id;
       });
-      assert.deepEqual( idsFromPage.slice(1, pageSize+1), idsFromDB.reverse().slice(0, pageSize), 'The funding opportunities are sorted in descending order by Solicitation Number correctly.');
+      assert.deepEqual( idsFromPage.slice(0, pageSize+1), idsFromDB.sort().reverse().slice(0, pageSize), 'The funding opportunities are sorted in descending order by Solicitation Number correctly.');
     });
   });
 
-  click('.sortable-header:contains(\'Program Announcement\')');
+  click('.sortable-header:contains(\'Funding Opportunity Title\')');
 
   andThen(function() {
     let titlesFromPage = [];
@@ -103,7 +109,7 @@ test ('sort the funding opportunities', function(assert) {
           return j.title;
       });
 
-      assert.deepEqual( titlesFromPage.slice(1, pageSize+1), titlesFromDB.sort().slice(0, pageSize), 'The funding opportunities are sorted in ascending order by Program Announcement correctly.');
+      assert.deepEqual( titlesFromPage.slice(0, pageSize+1), titlesFromDB.sort().slice(0, pageSize), 'The funding opportunities are sorted in ascending order by Program Announcement correctly.');
     });
   });
 

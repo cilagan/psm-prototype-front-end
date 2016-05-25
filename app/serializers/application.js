@@ -1,8 +1,8 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
-
-export default DS.JSONSerializer.extend({
+export default DS.RESTSerializer.extend({
+// export default DS.JSONSerializer.extend({
 
 // export default DS.JSONSerializer.extend({
    /*normalize: function(typeClass, hash) {
