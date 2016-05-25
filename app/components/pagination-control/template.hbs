@@ -1,36 +1,61 @@
-<ul class="pagination">
-  {{#if canStepBackward}}
-  <li>
-    <a href="#" {{action "stepBackward"}} aria-label="Previous">
-      <span aria-hidden="true">&laquo;</span>
-    </a>
-  </li>
-  {{/if}}
 
-  {{#each links as |link|}}
-    {{#if (eq currentPage link)}}
-      <li class="active"><a href="#" {{action "goToPage" link}}>{{link}}</a></li>
-    {{else}}
-      <li><a href="#"{{action "goToPage" link}}>{{link}}</a></li>
-    {{/if}}
-  {{/each}}
+<div class="row">
 
-  {{#if canStepForward}}
-  <li>
-    <a href="#" {{action "stepForward"}} aria-label="Next">
-      <span aria-hidden="true">&raquo;</span>
-    </a>
-  </li>
-  {{/if}}
-</ul>
+    <select class="test-page-size-select pagination" onchange= {{action 'changePageSize' value='target.value'}}> -->
+      {{#each pageSizes as |pageSize|}}
+        <option value={{pageSize.value}}>{{pageSize.label}}</option>
+      {{/each}}
+    </select>
 
-<select class="test-page-size-select" onchange= {{action 'changePageSize' value='target.value'}}> -->
-  {{#each pageSizes as |pageSize|}}
-    <option value={{pageSize.value}}>{{pageSize.label}}</option>
-  {{/each}}
-</select>
 
-{{!totalRecordsShown}}
 
+    <span class="pagination">
+      Showing {{#if isShowingAll}}all of {{else}}<strong>{{start}} to {{end}} </strong>of {{/if}}<span class="totalRecordsShown">{{totalRecordsShown}}</span>
+  </span>
+
+
+
+    <ul class="pagination">
+      {{#if canStepBackward}}
+      <li>
+        <a href="#" {{action "goToFirstPage"}} aria-label="First">
+          <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" {{action "stepBackward"}} aria-label="Previous">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i> Previous
+        </a>
+      </li>
+      {{/if}}
+
+      {{#each links as |link|}}
+        {{#if (eq currentPage link)}}
+          <li class="active"><a href="#" {{action "goToPage" link}}>{{link}}</a></li>
+        {{else}}
+          <li><a href="#"{{action "goToPage" link}}>{{link}}</a></li>
+        {{/if}}
+      {{/each}}
+
+      {{#if canStepForward}}
+      <li>
+        <a href="#" {{action "stepForward"}} aria-label="Next">
+          Next <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" {{action "gotToLastPage"}} aria-label="Last">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </a>
+      </li>
+      {{/if}}
+    </ul>
+
+
+
+
+
+
+</div>
 
 {{yield}}

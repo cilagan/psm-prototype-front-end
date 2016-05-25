@@ -1,12 +1,12 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'psm-prototype-front-end/tests/helpers/module-for-acceptance';
 
-let fundingOpSize = 100;
+let fundingOpSize = 150;
 moduleForAcceptance('Acceptance | wizard funding op', {
   beforeEach: function() {
     visit('/create');
-    server.loadFixtures('fundingopportunities');
-    // server.createList('fundingopportunity', fundingOpSize);
+    // server.loadFixtures('fundingopportunities');
+    server.createList('fundingopportunity', fundingOpSize);
   }
 });
 
@@ -25,24 +25,32 @@ test ('check selectable funding opportunities are present and page size changes'
 
   // server.createList('fundingopportunity', fundingOpSize);
   // visit('/create');
+  let testFOs = $.getJSON('propmgt/fundingops')
+  .then(function(json) {
+    assert.equal( find('.totalRecordsShown').eq(0).text(), json.length, 'Accurate total records shown');
+  });
 
   andThen(function() {
-    assert.equal(find('tr').length, 10 + notCountedTRs, '10 funding opportunities shown');
+    assert.equal(find('tr').length, 10 + notCountedTRs, 'Verify by default only 10 funding opportunities are displayed, 10 funding opportunities shown');
+    assert.equal( find('span.pagination').eq(0).text().trim(), 'Showing 1 to 10 of ' + find('.totalRecordsShown').eq(0).text(), 'Showing 1 to 10 of total records shown');
   });
 
   fillIn('.test-page-size-select', 50);
   andThen(function() {
     assert.equal(find('tr').length, 50 + notCountedTRs, '50 funding opportunities shown');
+    assert.equal( find('span.pagination').eq(0).text().trim(), 'Showing 1 to 50 of ' + find('.totalRecordsShown').eq(0).text(), 'Showing 1 to 50 of total records shown');
   });
 
   fillIn('.test-page-size-select', 100);
   andThen(function() {
     assert.equal(find('tr').length, 100 + notCountedTRs, '100 funding opportunities shown');
+    assert.equal( find('span.pagination').eq(0).text().trim(), 'Showing 1 to 100 of ' + find('.totalRecordsShown').eq(0).text(), 'Showing 1 to 100 of total records shown');
   });
 
   fillIn('.test-page-size-select', 262144);
   andThen(function() {
     assert.equal(find('tr').length, fundingOpSize + notCountedTRs, 'All funding opportunities shown');
+    assert.equal( find('span.pagination').eq(0).text().trim(), 'Showing all of ' + find('.totalRecordsShown').eq(0).text(), 'Showing all of total records shown');
   });
 
 });
@@ -61,7 +69,7 @@ test ('sort the funding opportunities', function(assert) {
       let titlesFromDB = json.map(function(j){
           return j.title;
       });
-      assert.deepEqual( titlesFromPage.slice(1, pageSize+1), titlesFromDB, 'The funding opportunities are sorted correctly.');
+      assert.deepEqual( titlesFromPage.slice(1, pageSize+1), titlesFromDB.slice(0, pageSize), 'The funding opportunities are sorted correctly.');
     });
   });
 
@@ -78,7 +86,7 @@ test ('sort the funding opportunities', function(assert) {
       let idsFromDB = json.map(function(j){
           return j.id;
       });
-      assert.deepEqual( idsFromPage.slice(1, pageSize+1), idsFromDB.reverse(), 'The funding opportunities are sorted in descending order by Solicitation Number correctly.');
+      assert.deepEqual( idsFromPage.slice(1, pageSize+1), idsFromDB.reverse().slice(0, pageSize), 'The funding opportunities are sorted in descending order by Solicitation Number correctly.');
     });
   });
 
@@ -95,7 +103,7 @@ test ('sort the funding opportunities', function(assert) {
           return j.title;
       });
 
-      assert.deepEqual( titlesFromPage.slice(1, pageSize+1), titlesFromDB.sort(), 'The funding opportunities are sorted in ascending order by Program Announcement correctly.');
+      assert.deepEqual( titlesFromPage.slice(1, pageSize+1), titlesFromDB.sort().slice(0, pageSize), 'The funding opportunities are sorted in ascending order by Program Announcement correctly.');
     });
   });
 

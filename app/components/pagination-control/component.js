@@ -4,11 +4,31 @@ export default Ember.Component.extend({
 
   maxLinks: 5,
 
+  // canGoToBeg: Ember.computed('this.currentPage', function() {
+  //   // body
+  // }),
+  //
+  // canGoToEnd: Ember.computed('this.currentPage', 'this.totalPages', function() {
+  //   // body
+  // }),
+
   canStepForward: Ember.computed('this.currentPage', 'this.totalPages', function() {
     return this.currentPage < this.totalPages;
   }),
   canStepBackward: Ember.computed('this.currentPage', function() {
     return this.currentPage > 1;
+  }),
+
+  isShowingAll: Ember.computed('this.totalPages', function() {
+    return this.totalPages == 1;
+  }),
+
+  start: Ember.computed('this.startRecord', function() {
+    return this.startRecord + 1;
+  }),
+
+  end: Ember.computed('this.endRecord', function() {
+    return this.endRecord;
   }),
 
   links: Ember.computed('this.currentPage', 'this.totalPages', function() {
@@ -57,10 +77,10 @@ export default Ember.Component.extend({
     goToPage: function(page) {
       this.set('currentPage', page);
     },
-    firstPage: function() {
+    goToFirstPage: function() {
       this.set('currentPage', 1);
     },
-    lastPage: function() {
+    gotToLastPage: function() {
       this.set('currentPage', 'totalPages');
     }
   }
